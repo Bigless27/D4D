@@ -1,0 +1,3 @@
+colors:
+#337ab7; dark blue
+#2ff296; lime green
