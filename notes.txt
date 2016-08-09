@@ -1,5 +1,6 @@
 colors:
 #337ab7; dark blue
 #2ff296; lime green
+#F05F40; orange
 
 refactor all files
