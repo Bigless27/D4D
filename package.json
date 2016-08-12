@@ -27,6 +27,11 @@
     "url": "https://github.com/BlackrockDigital/startbootstrap-creative.git"
   },
   "dependencies": {
-    "jquery": "^1.12.4"
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "jquery": "^1.12.4",
+    "lodash": "^4.15.0",
+    "method-override": "^2.3.6",
+    "mongoose": "^4.5.8"
   }
 }
