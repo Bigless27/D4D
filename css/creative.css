@@ -208,13 +208,16 @@ header .header-content .header-content-inner p {
     margin-right: auto;
   }
   header .header-content .header-content-inner h1 {
-    font-size: 50px;
+    font-size: 80px;
+    text-decoration: underline;
+    color: white;
   }
   header .header-content .header-content-inner p {
     font-size: 25px;
     max-width: 80%;
     margin-left: auto;
     margin-right: auto;
+    color: white;
   }
 }
 .section-heading {
