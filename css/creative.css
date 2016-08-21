@@ -11,27 +11,19 @@ body {
 body {
   font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
 }
-
-/*I added this for parallax*/
-#bottomcity {
-  height: 400px;
-}
-
-
-
 hr {
-  border-color: #2ff296;
+  border-color: #F05F40;
   border-width: 3px;
   max-width: 50px;
 }
 hr.light {
-  border-color: lime green;
+  border-color: white;
 }
 a {
   -webkit-transition: all 0.35s;
   -moz-transition: all 0.35s;
   transition: all 0.35s;
-  color: #222222;
+  color: #F05F40;
 }
 a:hover,
 a:focus {
@@ -50,8 +42,16 @@ p {
   line-height: 1.5;
   margin-bottom: 20px;
 }
+
+#bottom-city{
+  height: 250px;
+  display: block;
+
+}
+
+
 .bg-primary {
-  background-color: #337ab7; /*dark blue*/
+  background-color: #F05F40;
 }
 .bg-dark {
   background-color: #222222;
@@ -78,14 +78,14 @@ aside {
   transition: all 0.35s;
 }
 .navbar-default .navbar-header .navbar-brand {
-  color: #2ff296;
+  color: #F05F40;
   font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
   font-weight: 700;
   text-transform: uppercase;
 }
 .navbar-default .navbar-header .navbar-brand:hover,
 .navbar-default .navbar-header .navbar-brand:focus {
-  color: #2ff296;
+  color: #eb3812;
 }
 .navbar-default .navbar-header .navbar-toggle {
   font-weight: 700;
@@ -102,11 +102,11 @@ aside {
 }
 .navbar-default .nav > li > a:hover,
 .navbar-default .nav > li > a:focus:hover {
-  color: #2ff296;
+  color: #F05F40;
 }
 .navbar-default .nav > li.active > a,
 .navbar-default .nav > li.active > a:focus {
-  color: #2ff296 !important;
+  color: #F05F40 !important;
   background-color: transparent;
 }
 .navbar-default .nav > li.active > a:hover,
@@ -138,8 +138,7 @@ aside {
     border-color: rgba(34, 34, 34, 0.05);
   }
   .navbar-default.affix .navbar-header .navbar-brand {
-    color: #2ff296;
-
+    color: #F05F40;
     font-size: 14px;
   }
   .navbar-default.affix .navbar-header .navbar-brand:hover,
@@ -164,7 +163,7 @@ header {
   background-size: cover;
   -o-background-size: cover;
   background-position: center;
-/*  background-image: url('../img/header.jpg');*/
+  /*background-image: url('../img/header.jpg');*/
   text-align: center;
   color: white;
 }
@@ -179,15 +178,15 @@ header .header-content .header-content-inner h1 {
   text-transform: uppercase;
   margin-top: 0;
   margin-bottom: 0;
-  font-size: 40px;
+  font-size: 30px;
 }
 header .header-content .header-content-inner hr {
   margin: 30px auto;
 }
 header .header-content .header-content-inner p {
   font-weight: 300;
-/*  color: rgba(255, 255, 255, 0.8);*/
-  font-size: 15px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 16px;
   margin-bottom: 50px;
 }
 @media (min-width: 768px) {
@@ -208,16 +207,13 @@ header .header-content .header-content-inner p {
     margin-right: auto;
   }
   header .header-content .header-content-inner h1 {
-    font-size: 80px;
-    text-decoration: underline;
-    color: white;
+    font-size: 50px;
   }
   header .header-content .header-content-inner p {
-    font-size: 25px;
+    font-size: 18px;
     max-width: 80%;
     margin-left: auto;
     margin-right: auto;
-    color: white;
   }
 }
 .section-heading {
@@ -227,7 +223,14 @@ header .header-content .header-content-inner p {
   max-width: 400px;
   margin: 50px auto 0;
 }
+
+
+/*Min Width 900!!!!!!!!!!!! */
 @media (min-width: 992px) {
+ 
+  #bottom-city{
+    height: 500px;
+  }
   .service-box {
     margin: 20px auto 0;
   }
@@ -282,6 +285,8 @@ header .header-content .header-content-inner p {
   outline: none;
 }
 @media (min-width: 768px) {
+
+
   .portfolio-box .portfolio-box-caption .portfolio-box-caption-content .project-category {
     font-size: 16px;
   }
@@ -293,14 +298,14 @@ header .header-content .header-content-inner p {
   margin: 0 auto 20px;
 }
 .text-primary {
-  color: #2ff296;
+  color: #F05F40;
 }
 .no-gutter > [class*='col-'] {
   padding-right: 0;
   padding-left: 0;
 }
 .btn-default {
-  color: #2ff296;
+  color: #222222;
   background-color: white;
   border-color: white;
   -webkit-transition: all 0.35s;
@@ -313,8 +318,8 @@ header .header-content .header-content-inner p {
 .btn-default:active,
 .btn-default.active,
 .open > .dropdown-toggle.btn-default {
-  color: #fff;
-  background-color: #f05f40;
+  color: #222222;
+  background-color: #f2f2f2;
   border-color: #ededed;
 }
 .btn-default:active,
@@ -348,9 +353,9 @@ fieldset[disabled] .btn-default.active {
   background-color: #222222;
 }
 .btn-primary {
-  color: #2ff296;
-  background-color: #337ab7;
-  border-color: #2ff296;
+  color: white;
+  background-color: #F05F40;
+  border-color: #F05F40;
   -webkit-transition: all 0.35s;
   -moz-transition: all 0.35s;
   transition: all 0.35s;
@@ -388,11 +393,11 @@ fieldset[disabled] .btn-primary:active,
 .btn-primary.disabled.active,
 .btn-primary[disabled].active,
 fieldset[disabled] .btn-primary.active {
-  background-color:  #2ff296;
-  border-color:  #2ff296;
+  background-color: #F05F40;
+  border-color: #F05F40;
 }
 .btn-primary .badge {
-  color: #2ff296; /*lime-green*/
+  color: #F05F40;
   background-color: white;
 }
 .btn {
