@@ -11,6 +11,8 @@ body {
 body {
   font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
 }
+
+
 hr {
   border-color: #F05F40;
   border-width: 3px;
@@ -46,7 +48,6 @@ p {
 #bottom-city{
   height: 250px;
   display: block;
-
 }
 
 
@@ -163,7 +164,6 @@ header {
   background-size: cover;
   -o-background-size: cover;
   background-position: center;
-  /*background-image: url('../img/header.jpg');*/
   text-align: center;
   color: white;
 }

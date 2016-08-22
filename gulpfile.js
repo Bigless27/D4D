@@ -5,6 +5,7 @@ var header = require('gulp-header');
 var cleanCSS = require('gulp-clean-css');
 var rename = require("gulp-rename");
 var uglify = require('gulp-uglify');
+var concat = require('gulp-concat');
 var pkg = require('./package.json');
 
 // Set the banner content
@@ -20,7 +21,7 @@ var pkg = require('./package.json');
 gulp.task('less', function() {
     return gulp.src('less/creative.less')
         .pipe(less())
-        .pipe(header(banner, { pkg: pkg }))
+        // .pipe(header(banner, { pkg: pkg }))
         .pipe(gulp.dest('css'))
         .pipe(browserSync.reload({
             stream: true
@@ -38,11 +39,18 @@ gulp.task('minify-css', ['less'], function() {
         }))
 });
 
+gulp.task('scripts', function() {
+    return gulp.src('app/**/*.js')
+        .pipe(concat('appAll.js'))
+        .pipe(gulp.dest('./js'))
+})
+
+
 // Minify JS
 gulp.task('minify-js', function() {
     return gulp.src('js/creative.js')
         .pipe(uglify())
-        .pipe(header(banner, { pkg: pkg }))
+        // .pipe(header(banner, { pkg: pkg }))
         .pipe(rename({ suffix: '.min' }))
         .pipe(gulp.dest('js'))
         .pipe(browserSync.reload({
@@ -61,6 +69,12 @@ gulp.task('copy', function() {
     gulp.src(['node_modules/magnific-popup/dist/*'])
         .pipe(gulp.dest('vendor/magnific-popup'))
 
+    gulp.src(['node_modules/angular/angular.min.js'])
+        .pipe(gulp.dest('vendor/angular'))
+
+    gulp.src(['node_modules/angular-ui-router/release/angular-ui-router.min.js'])
+        .pipe(gulp.dest('vendor/angular-ui-router'))
+
     gulp.src(['node_modules/scrollreveal/dist/*.js'])
         .pipe(gulp.dest('vendor/scrollreveal'))
 
@@ -76,7 +90,7 @@ gulp.task('copy', function() {
 })
 
 // Run everything
-gulp.task('default', ['less', 'minify-css', 'minify-js', 'copy']);
+gulp.task('default', ['less', 'minify-css', 'scripts', 'minify-js', 'copy']);
 
 // Configure the browserSync task
 gulp.task('browserSync', function() {
@@ -88,9 +102,10 @@ gulp.task('browserSync', function() {
 })
 
 // Dev task with browserSync
-gulp.task('dev', ['browserSync', 'less', 'minify-css', 'minify-js'], function() {
+gulp.task('dev', ['browserSync', 'less', 'scripts', 'minify-css', 'minify-js'], function() {
     gulp.watch('less/*.less', ['less']);
     gulp.watch('css/*.css', ['minify-css']);
+    gulp.watch('app/**/*.js', ['scripts'])
     gulp.watch('js/*.js', ['minify-js']);
     // Reloads the browser whenever HTML, Css or JS files change
     gulp.watch('*.html', browserSync.reload);
