@@ -30,6 +30,7 @@ app.use('/vendor', express.static(path.join(__dirname, '../vendor')))
 app.use('/js', express.static(path.join(__dirname, '../js')))
 app.use('/css', express.static(path.join(__dirname, '../css')))
 app.use('/parallax', express.static(path.join(__dirname, '../parallax')))
+app.use('/login.html', express.static(path.join(__dirname, '../login.html')))
 app.use('/img', express.static(path.join(__dirname, '../img')))
 
 

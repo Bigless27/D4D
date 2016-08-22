@@ -48,7 +48,6 @@ p {
 #bottom-city{
   height: 250px;
   display: block;
-  background-image: url('../img/Dallas-Drawn.jpg');
 }
 
 
@@ -165,7 +164,6 @@ header {
   background-size: cover;
   -o-background-size: cover;
   background-position: center;
-  background-image: url('../img/dallas_gallery.jpg');
   text-align: center;
   color: white;
 }
@@ -232,7 +230,6 @@ header .header-content .header-content-inner p {
  
   #bottom-city{
     height: 500px;
-    background-image: url('../img/Dallas-Drawn.jpg')
   }
   .service-box {
     margin: 20px auto 0;
