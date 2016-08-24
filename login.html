@@ -56,83 +56,8 @@
 
 </head>
 <body id="page-top">
-	 <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
-                </button>
-                <a class="navbar-brand page-scroll" href="index.html">Design for Dallas</a>
-            </div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a class="page-scroll" href="#about">About</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#services">Services</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#contact">Contact</a>
-                    </li>
-                    <li>
-                        <a class = "page-scroll" href="login.html">Login</a> 
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container-fluid -->
-    </nav>
-
-<!-- parralax below!! -->
-    <header id = 'dallas-header'>
-        <div class="header-content">
-            <div class="header-content-inner">
-                <div id = "login-form" class = "login jumbotron center-block" ng-show = "!loggedIn">
-	
-					<h1 class = 'login-title'>Login</h1>
-
-
-					<form role = "form" data-toggle = 'validator'>
-
-
-						<div class = "form-group has-feedback">
-							<label for = "email" class = 'control-label'>Email</label>
-							<div class = "input-group">
-								<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-								<input type = "text" ng-model = "user.email" class = "form-control"
-								id = "email" placeholder = "Email" data-error="Please, enter a valid email" required>
-							</div>
-							<div class = 'help-block with-errors'></div>
-						</div>
-
-
-						<div class = "form-group has-feedback">
-							<label for = "password">Password</label>
-							<div class = "input-group">
-								<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-								<input type = "password" ng-model = "user.password" class = "form-control" id = "password"
-								placeholder = "Password" data-error="Please, enter a password" required>
-							</div>
-							<div class = 'help-block with-errors'></div>
-						</div>
-
-						<button type = "submit" ng-click = "logUserIn()" class = "btn btn-primary"> Submit</button>
-
-						<button class = 'btn btn-primary' ng-click="authenticate('google')">Sign in with Google</button>
-
-
-						</form>
-					<button class = 'btn btn-default signup-button' ui-sref = "signUp"> Click here to SignUp</button>
-				</div>
-
-            </div>
-        </div>
-    </header>
+	<span ui-view></span>
 
 </body>
-</html>
+</html> 

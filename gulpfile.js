@@ -109,6 +109,7 @@ gulp.task('dev', ['browserSync', 'sass', 'scripts', 'minify-css', 'minify-js'], 
     gulp.watch('js/*.js', ['minify-js']);
     // Reloads the browser whenever HTML, Css or JS files change
     gulp.watch('*.html', browserSync.reload);
+    gulp.watch('app/**/*.html', browserSync.reload)
     gulp.watch('css/**/*.css', browserSync.reload)
     gulp.watch('js/**/*.js', browserSync.reload);
 });
