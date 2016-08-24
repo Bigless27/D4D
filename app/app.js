@@ -10,8 +10,7 @@
 			.state('login', {
 				url: '/login',
 				templateUrl: 'app/login/login-partial.html',
-				controller: 'LoginController',
-				css: 'css/login.css'
+				controller: 'LoginController'
 			})
 			.state('signUp', {
 				url: '/signUp', 

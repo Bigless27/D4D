@@ -10,8 +10,7 @@
 			.state('login', {
 				url: '/login',
 				templateUrl: 'app/login/login-partial.html',
-				controller: 'LoginController',
-				css: 'css/login.css'
+				controller: 'LoginController'
 			})
 			.state('signUp', {
 				url: '/signUp', 
@@ -23,12 +22,6 @@
 (function() {
 	angular.module('DforD')
 	.controller('LoginController', ['$scope', '$state', function($scope, $state) {
-
-	}])
-}());
-(function() {
-	angular.module('DforD')
-	.controller('MainController', ['$scope', '$state', function($scope, $state) {
 
 	}])
 }());
