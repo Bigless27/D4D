@@ -10,7 +10,15 @@
   border-radius: 25px; }
 
 header .login-title {
-  color: #a8a8a8; }
+  color: #555555;
+  padding-bottom: 20px; }
+
+header label {
+  color: #555555; }
+
+header .signup-button {
+  color: #555555;
+  margin-top: 15px; }
 
 header .input-group {
   padding: 0px 20px; }

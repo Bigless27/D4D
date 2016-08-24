@@ -5,7 +5,6 @@
   	-o-background-size: cover;
   	background-size: cover;
   	min-height: 100%;
-
 }
 
 #login-form{
@@ -14,8 +13,20 @@
 
 header{
 	.login-title{
-		color: #a8a8a8;
+		color: #555555;
+		padding-bottom: 20px;
 	}
+
+	label{
+		color: #555555;
+	}
+
+	.signup-button{
+		color: #555555;
+		margin-top: 15px;
+	}
+
+
 
 	.input-group{
 		padding: 0px 20px;
