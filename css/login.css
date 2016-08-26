@@ -22,3 +22,12 @@ header .signup-button {
 
 header .input-group {
   padding: 0px 20px; }
+
+/*form validation show errors*/
+.form-group .help-block {
+  display: none; }
+
+.form-group.has-error .help-block {
+  display: block;
+  font-size: 14px;
+  color: red; }

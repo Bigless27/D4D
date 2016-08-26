@@ -21,7 +21,7 @@
                         <a class="page-scroll" href="#contact">Contact</a>
                     </li>
                     <li>
-                        <a class = "page-scroll" href="login.html">Login</a> 
+                        <a class = "page-scroll" href="profile.html">Login</a> 
                     </li>
                 </ul>
             </div>
@@ -39,34 +39,31 @@
 					<h1 class = 'login-title'>Login</h1>
 
 
-					<form role = "form" data-toggle = 'validator'>
-
-
-						<div class = "form-group has-feedback">
+					<form name ="userForm" role = "form" data-toggle = 'validator'>
+						<div class = "form-group" show-errors>
 							<label for = "email" class = 'control-label'>Email</label>
 							<div class = "input-group">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-								<input type = "text" ng-model = "user.email" class = "form-control"
-								id = "email" placeholder = "Email" data-error="Please, enter a valid email" required>
-							</div>
-                            
-							<div class = 'help-block with-errors'></div>
+								<input name = 'email' type = "email" ng-model = "user.email" class = "form-control"
+								id = "email" placeholder = "Email" required>
+                            </div>
+                            <p class="help-block" ng-if="userForm.email.$error.required">The user's email is required</p>
 						</div>
 
 
-						<div class = "form-group has-feedback">
+						<div class = "form-group" show-errors>
 							<label for = "password">Password</label>
 							<div class = "input-group">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-								<input type = "password" ng-model = "user.password" class = "form-control" id = "password"
-								placeholder = "Password" data-error="Please, enter a password" required>
-							</div>
-							<div class = 'help-block with-errors'></div>
+								<input dacey = 'stupid' name='password' type = "password" ng-model = "user.password" class = "form-control" id = "password"
+								placeholder = "Password" required>
+                            </div>
+                           <p class="help-block" ng-if="userForm.password.$error.required">The user's password is required</p>
 						</div>
 
-						<button type = "submit" ng-click = "logUserIn()" class = "btn btn-primary"> Submit</button>
+						<button type = 'button' ng-click = "logUserIn()" class = "btn btn-primary">Submit</button>
 
-						<button class = 'btn btn-primary' ng-click="authenticate('google')">Sign in with Google</button>
+                        <button class = 'btn btn-primary' ng-click="authenticate('google')">Sign in with Google</button>
 
 
 						</form>
