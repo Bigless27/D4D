@@ -7,6 +7,8 @@ var rename = require("gulp-rename");
 var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
 var pkg = require('./package.json');
+var plumber = require('gulp-plumber');
+var gutil = require('gulp-util');
 
 // Set the banner content
 // var banner = ['/*!\n',
@@ -19,9 +21,18 @@ var pkg = require('./package.json');
 
 // Compile LESS files from /less into /css
 
+var onError = function(err) {
+    gutil.beep();
+    console.log(err);
+    this.emit('end');
+}
+
 gulp.task('sass', function() {
     return gulp.src('./sass/*.scss')
-        .pipe(sass().on('error', sass.logError))
+        .pipe(plumber({
+            errorHandler: onError
+        }))
+        .pipe(sass())
         .pipe(gulp.dest('./css'))
          .pipe(browserSync.reload({
             stream: true
@@ -31,6 +42,9 @@ gulp.task('sass', function() {
 // Minify compiled CSS
 gulp.task('minify-css', ['sass'], function() {
     return gulp.src('css/creative.css')
+        .pipe(plumber({
+            errorHandler: onError
+        }))
         .pipe(cleanCSS({ compatibility: 'ie8' }))
         .pipe(rename({ suffix: '.min' }))
         .pipe(gulp.dest('css'))
@@ -41,6 +55,9 @@ gulp.task('minify-css', ['sass'], function() {
 
 gulp.task('scripts', function() {
     return gulp.src('app/**/*.js')
+        .pipe(plumber({
+            errorHandler: onError
+        }))
         .pipe(concat('appAll.js'))
         .pipe(gulp.dest('./js'))
 })
@@ -49,6 +66,9 @@ gulp.task('scripts', function() {
 // Minify JS
 gulp.task('minify-js', function() {
     return gulp.src('js/creative.js')
+        .pipe(plumber({
+            errorHandler: onError
+        }))
         .pipe(uglify())
         // .pipe(header(banner, { pkg: pkg }))
         .pipe(rename({ suffix: '.min' }))
