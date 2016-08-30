@@ -14,7 +14,8 @@
 							<input name = 'email' type = "email" ng-model = "user.email" class = "form-control"
 							id = "email" placeholder = "Email" required>
                         </div>
-                        <p class="help-block" ng-if="userForm.email.$error.required">The user's email is required</p>
+                       		<p class="help-block" ng-if= "userForm.email.$error.required">The user's email is required</p>
+            				<p class="help-block" ng-if= "userForm.email.$error.email">Not a valid emmail</p>
 					</div>
 
 
@@ -22,10 +23,12 @@
 						<label for = "password">Password</label>
 						<div class = "input-group">
 							<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-							<input dacey = 'stupid' name='password' type = "password" ng-model = "user.password" class = "form-control" id = "password"
-							placeholder = "Password" required>
+							<input  name='password' type = "password" ng-model = "user.password" class = "form-control" id = "password"
+							placeholder = "Password" ng-minlength = '4' ng-maxlength="10" required>
                         </div>
-                       <p class="help-block" ng-if="userForm.password.$error.required">The user's password is required</p>
+                       	<p class="help-block" ng-if="userForm.password.$error.required">The user's password is required</p>
+                       	<p class="help-block" ng-show="userForm.password.$error.minlength">Too short! Must be minimum 4 characters long</p>
+        			   	<p class="help-block" ng-show="userForm.password.$error.maxlength">Too long!</p>
 					</div>
 
 					<button type = 'button' ng-click = "logUserIn()" class = "btn btn-primary">Submit</button>
