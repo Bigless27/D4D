@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
-// var api = require('./api/api');
+var api = require('./api/api');
+var auth = require('./auth/authRoutes')
 var config = require('./config/config');
 var mongoose = require('mongoose');
 var path = require('path');
@@ -18,13 +19,15 @@ if (config.seed) {
 // setup the app middlware
 require('./middleware/appMiddleware')(app);
 
-// // setup the api
-// app.use('/api', api);
+
 
 app.get('/', function(req, res) {
 	res.sendFile(path.join(__dirname, './../index.html'))
 })
 
+
+app.use('/api', api);
+app.use('/auth', auth);
 app.use('/node_modules', express.static(path.join(__dirname, '../node_modules')));
 app.use('/vendor', express.static(path.join(__dirname, '../vendor')))
 app.use('/build', express.static(path.join(__dirname, '../build')))

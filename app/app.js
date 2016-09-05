@@ -17,5 +17,10 @@
 					templateUrl: 'app/signup/signup.html',
 					controller: 'SignupController'
 				})
+				.state('main', {
+					url: '/main',
+					templateUrl: 'app/main/main-partial.html',
+					controller: 'MainController'
+				})
 		}])
 }());

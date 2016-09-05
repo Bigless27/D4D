@@ -17,23 +17,81 @@
 					templateUrl: 'app/signup/signup.html',
 					controller: 'SignupController'
 				})
+				.state('main', {
+					url: '/main',
+					templateUrl: 'app/main/main-partial.html',
+					controller: 'MainController'
+				})
 		}])
 }());
 (function() {
 	angular.module('DforD')
-	.controller('LoginController', ['$scope', '$state', function($scope, $state) {
-		$scope.logUserIn = function() {
+	.controller('LoginController', ['$scope', '$state', '$http', '$window', function($scope, $state, $http, $window) {
+		$scope.logUserIn = function(user) {
 			$scope.$broadcast('show-errors-check-validity');
 
 			if($scope.userForm.$invalid){return;}
+
+			$http.post('auth/signin', user)
+					.success(function(data) {
+						$window.sessionStorage.jwt = data['token']
+						$state.go('main')
+					})
+					.error(function(error) {
+						console.log(error)
+			})
 		}
 
 	}])
 }());
 (function() {
 	angular.module('DforD')
-	.controller('SignupController', ['$scope', '$state', function($scope, $state) {
+	.controller('SignupController', ['$scope', '$state','$http','$window', function($scope, $state, $http, $window) {
+		$scope.signUp = function(user) {
+			$scope.$broadcast('show-errors-check-validity')
 
+			if ($scope.userForm.$invalid){return;}
+
+			$http.post('api/users', user)
+				.success(function(data) {
+					$window.sessionStorage.jwt = data['token']
+					$state.go('main')
+				})
+				.error(function(error) {
+					console.log(error)
+				})
+		}
+	}])
+}());
+(function() {
+	angular.module('DforD')
+	.controller('MainController', ['$scope', '$state', '$http', '$window', 
+		function($scope, $state, $http, $window) {
+
+			$scope.me = function() {
+				
+
+				var token = $window.sessionStorage['jwt']
+				
+				$http.get('api/users/me', {
+					headers: {
+						"Authorization": `Bearer ${token}`
+					}
+				})
+				.success(function(data){
+						console.log(data)
+				})
+				.error(function(err){
+					console.log(err)
+				})
+			}
+
+
+			$scope.logout = function() {
+				$window.sessionStorage.clear()
+				$state.go('login')
+			}
+		
 	}])
 }());
 (function() {
