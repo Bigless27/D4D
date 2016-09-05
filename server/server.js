@@ -27,11 +27,11 @@ app.get('/', function(req, res) {
 
 app.use('/node_modules', express.static(path.join(__dirname, '../node_modules')));
 app.use('/vendor', express.static(path.join(__dirname, '../vendor')))
-app.use('/js', express.static(path.join(__dirname, '../js')))
-app.use('/css', express.static(path.join(__dirname, '../css')))
+app.use('/build', express.static(path.join(__dirname, '../build')))
 app.use('/parallax', express.static(path.join(__dirname, '../parallax')))
-app.use('/login.html', express.static(path.join(__dirname, '../login.html')))
-app.use('/img', express.static(path.join(__dirname, '../img')))
+app.use('/profile.html', express.static(path.join(__dirname, '../profile.html')))
+app.use('/app', express.static(path.join(__dirname, '../app')))
+
 
 
 // set up global error handling

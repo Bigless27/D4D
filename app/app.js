@@ -4,9 +4,6 @@
 		function($stateProvider, $urlRouterProvider, showErrorsConfigProvider) {
 
 			showErrorsConfigProvider.showSuccess(true)
-
-
-
 			// States
 			$urlRouterProvider.otherwise('login');
 			$stateProvider

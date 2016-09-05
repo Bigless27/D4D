@@ -16,6 +16,7 @@
     "gulp-clean-css": "^2.0.10",
     "gulp-concat": "^2.6.0",
     "gulp-header": "^1.8.7",
+    "gulp-nodemon": "^2.1.0",
     "gulp-plumber": "^1.1.0",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.3.2",
@@ -33,13 +34,18 @@
     "angular": "^1.5.8",
     "angular-bootstrap-show-errors": "^2.3.0",
     "angular-ui-router": "^0.3.1",
+    "bcrypt": "^0.8.7",
     "body-parser": "^1.15.2",
     "bootstrap-validator": "^0.11.5",
+    "connect-flash": "^0.1.1",
+    "cors": "^2.8.0",
     "express": "^4.14.0",
+    "express-jwt": "^5.0.0",
     "jquery": "^1.12.4",
     "lodash": "^4.15.0",
     "method-override": "^2.3.6",
     "mongoose": "^4.5.8",
-    "ng-parallax": "^1.0.1"
+    "ng-parallax": "^1.0.1",
+    "passport": "^0.3.2"
   }
 }

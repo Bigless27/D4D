@@ -9,6 +9,7 @@ var concat = require('gulp-concat');
 var pkg = require('./package.json');
 var plumber = require('gulp-plumber');
 var gutil = require('gulp-util');
+var nodemon = require('gulp-nodemon')
 
 // Set the banner content
 // var banner = ['/*!\n',
@@ -27,13 +28,35 @@ var onError = function(err) {
     this.emit('end');
 }
 
+
+
+gulp.task('nodemon', function(cb){
+
+  var started = false;
+
+  return nodemon({
+    script: 'index.js',
+  })
+  .on('start', function() {
+    if(!started){
+        cb();
+        started = true
+        browserSync.reload
+    }
+  })
+  // .on('exit', function() {
+  //   console.log('exiting')
+  //   process.exit()
+  // })
+})
+
 gulp.task('sass', function() {
-    return gulp.src('./sass/*.scss')
+    return gulp.src('./public/sass/*.scss')
         .pipe(plumber({
             errorHandler: onError
         }))
         .pipe(sass())
-        .pipe(gulp.dest('./css'))
+        .pipe(gulp.dest('./build/css'))
          .pipe(browserSync.reload({
             stream: true
         }))
@@ -41,13 +64,13 @@ gulp.task('sass', function() {
 
 // Minify compiled CSS
 gulp.task('minify-css', ['sass'], function() {
-    return gulp.src('css/creative.css')
+    return gulp.src('public/css/creative.css')
         .pipe(plumber({
             errorHandler: onError
         }))
         .pipe(cleanCSS({ compatibility: 'ie8' }))
         .pipe(rename({ suffix: '.min' }))
-        .pipe(gulp.dest('css'))
+        .pipe(gulp.dest('build/css'))
         .pipe(browserSync.reload({
             stream: true
         }))
@@ -59,20 +82,20 @@ gulp.task('scripts', function() {
             errorHandler: onError
         }))
         .pipe(concat('appAll.js'))
-        .pipe(gulp.dest('./js'))
+        .pipe(gulp.dest('./build/js'))
 })
 
 
 // Minify JS
 gulp.task('minify-js', function() {
-    return gulp.src('js/creative.js')
+    return gulp.src('public/js/creative.js')
         .pipe(plumber({
             errorHandler: onError
         }))
         .pipe(uglify())
         // .pipe(header(banner, { pkg: pkg }))
         .pipe(rename({ suffix: '.min' }))
-        .pipe(gulp.dest('js'))
+        .pipe(gulp.dest('build/js'))
         .pipe(browserSync.reload({
             stream: true
         }))
@@ -116,11 +139,10 @@ gulp.task('copy', function() {
 gulp.task('default', ['sass', 'minify-css', 'scripts', 'minify-js', 'copy']);
 
 // Configure the browserSync task
-gulp.task('browserSync', function() {
-    browserSync.init({
-        server: {
-            baseDir: ''
-        },
+gulp.task('browserSync', ['nodemon'], function() {
+    browserSync.init(null,{
+        proxy: 'localhost:3000',
+        port: 8000
     })
 })
 
