@@ -17,7 +17,7 @@ router.get('/google/callback', function(req, res, next) {
 
 		if(user) {
 			var token = createToken(user._id)
-			return res.redirect('/#/main?access_token=' + token)
+			return res.redirect('/profile.html#/main?access_token=' + token)
 		}
 		else{
 			return res.redirect('/#/login')
