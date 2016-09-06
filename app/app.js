@@ -14,13 +14,19 @@
 				})
 				.state('signUp', {
 					url: '/signUp', 
-					templateUrl: 'app/signup/signup.html',
+					templateUrl: 'app/signup/signup-partial.html',
 					controller: 'SignupController'
 				})
 				.state('main', {
 					url: '/main',
 					templateUrl: 'app/main/main-partial.html',
-					controller: 'MainController'
+					controller: 'MainController',
+					onEnter: ['$state', '$stateParams', '$location', '$window', function( $state, $stateParams, $location, $window){
+							if($location.search().access_token){
+								$window.sessionStorage.jwt = $location.search().access_token
+								$location.url($location.path())
+							}
+						}]
 				})
 		}])
 }());
