@@ -1,5 +1,5 @@
 var gulp = require('gulp');
-var less = require('gulp-less');
+var sass = require('gulp-sass');
 var browserSync = require('browser-sync').create();
 var header = require('gulp-header');
 var cleanCSS = require('gulp-clean-css');
@@ -7,6 +7,9 @@ var rename = require("gulp-rename");
 var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
 var pkg = require('./package.json');
+var plumber = require('gulp-plumber');
+var gutil = require('gulp-util');
+var nodemon = require('gulp-nodemon')
 
 // Set the banner content
 // var banner = ['/*!\n',
@@ -18,22 +21,56 @@ var pkg = require('./package.json');
 // ].join('');
 
 // Compile LESS files from /less into /css
-gulp.task('less', function() {
-    return gulp.src('less/creative.less')
-        .pipe(less())
-        // .pipe(header(banner, { pkg: pkg }))
-        .pipe(gulp.dest('css'))
-        .pipe(browserSync.reload({
+
+var onError = function(err) {
+    gutil.beep();
+    console.log(err);
+    this.emit('end');
+}
+
+
+
+gulp.task('nodemon', function(cb){
+
+  var started = false;
+
+  return nodemon({
+    script: 'index.js',
+  })
+  .on('start', function() {
+    if(!started){
+        cb();
+        started = true
+        browserSync.reload
+    }
+  })
+  // .on('exit', function() {
+  //   console.log('exiting')
+  //   process.exit()
+  // })
+})
+
+gulp.task('sass', function() {
+    return gulp.src('./public/sass/*.scss')
+        .pipe(plumber({
+            errorHandler: onError
+        }))
+        .pipe(sass())
+        .pipe(gulp.dest('./build/css'))
+         .pipe(browserSync.reload({
             stream: true
         }))
-});
+})
 
 // Minify compiled CSS
-gulp.task('minify-css', ['less'], function() {
-    return gulp.src('css/creative.css')
+gulp.task('minify-css', ['sass'], function() {
+    return gulp.src('public/css/creative.css')
+        .pipe(plumber({
+            errorHandler: onError
+        }))
         .pipe(cleanCSS({ compatibility: 'ie8' }))
         .pipe(rename({ suffix: '.min' }))
-        .pipe(gulp.dest('css'))
+        .pipe(gulp.dest('build/css'))
         .pipe(browserSync.reload({
             stream: true
         }))
@@ -41,18 +78,24 @@ gulp.task('minify-css', ['less'], function() {
 
 gulp.task('scripts', function() {
     return gulp.src('app/**/*.js')
+        .pipe(plumber({
+            errorHandler: onError
+        }))
         .pipe(concat('appAll.js'))
-        .pipe(gulp.dest('./js'))
+        .pipe(gulp.dest('./build/js'))
 })
 
 
 // Minify JS
 gulp.task('minify-js', function() {
-    return gulp.src('js/creative.js')
+    return gulp.src('public/js/creative.js')
+        .pipe(plumber({
+            errorHandler: onError
+        }))
         .pipe(uglify())
         // .pipe(header(banner, { pkg: pkg }))
         .pipe(rename({ suffix: '.min' }))
-        .pipe(gulp.dest('js'))
+        .pipe(gulp.dest('build/js'))
         .pipe(browserSync.reload({
             stream: true
         }))
@@ -62,6 +105,9 @@ gulp.task('minify-js', function() {
 gulp.task('copy', function() {
     gulp.src(['node_modules/bootstrap/dist/**/*', '!**/npm.js', '!**/bootstrap-theme.*', '!**/*.map'])
         .pipe(gulp.dest('vendor/bootstrap'))
+
+    gulp.src(['node_modules/bootstrap-validator/dist/validator.min.js'])
+        .pipe(gulp.dest('vendor/bootstrap-validator'))
 
     gulp.src(['node_modules/jquery/dist/jquery.js', 'node_modules/jquery/dist/jquery.min.js'])
         .pipe(gulp.dest('vendor/jquery'))
@@ -90,25 +136,25 @@ gulp.task('copy', function() {
 })
 
 // Run everything
-gulp.task('default', ['less', 'minify-css', 'scripts', 'minify-js', 'copy']);
+gulp.task('default', ['sass', 'minify-css', 'scripts', 'minify-js', 'copy']);
 
 // Configure the browserSync task
-gulp.task('browserSync', function() {
-    browserSync.init({
-        server: {
-            baseDir: ''
-        },
+gulp.task('browserSync', ['nodemon'], function() {
+    browserSync.init(null,{
+        proxy: 'localhost:3000',
+        port: 8000
     })
 })
 
 // Dev task with browserSync
-gulp.task('dev', ['browserSync', 'less', 'scripts', 'minify-css', 'minify-js'], function() {
-    gulp.watch('less/*.less', ['less']);
-    gulp.watch('css/*.css', ['minify-css']);
+gulp.task('dev', ['browserSync', 'sass', 'scripts', 'minify-css', 'minify-js'], function() {
+    gulp.watch('public/sass/*.scss', ['sass'])
+    gulp.watch('public/css/*.css', ['minify-css']);
     gulp.watch('app/**/*.js', ['scripts'])
-    gulp.watch('js/*.js', ['minify-js']);
+    gulp.watch('public/js/*.js', ['minify-js']);
     // Reloads the browser whenever HTML, Css or JS files change
     gulp.watch('*.html', browserSync.reload);
+    gulp.watch('app/**/*.html', browserSync.reload)
     gulp.watch('css/**/*.css', browserSync.reload)
     gulp.watch('js/**/*.js', browserSync.reload);
 });

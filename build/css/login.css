@@ -1,0 +1,33 @@
+#dallas-header {
+  background-image: url(../img/dallas_gallery.jpg);
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  min-height: 100%; }
+
+#login-form {
+  border-radius: 25px; }
+
+header .login-title {
+  color: #555555;
+  padding-bottom: 20px; }
+
+header label {
+  color: #555555; }
+
+header .signup-button {
+  color: #555555;
+  margin-top: 15px; }
+
+header .input-group {
+  padding: 0px 20px; }
+
+/*form validation show errors*/
+.form-group .help-block {
+  display: none; }
+
+.form-group.has-error .help-block {
+  display: block;
+  font-size: 14px;
+  color: red; }
