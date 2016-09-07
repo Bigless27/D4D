@@ -1,7 +1,7 @@
 (function() {
 	angular.module('DforD')
-	.controller('LoginController', ['$scope', '$state', '$http', '$window',
-	'$rootScope', function($scope, $state, $http, $window, $rootScope) {
+	.controller('LoginController', ['$scope', '$state', '$http', 'AuthenticationService', '$window',
+	'$rootScope', function($scope, $state, $http, AuthenticationService, $window, $rootScope) {
 		
 		$scope.logUserIn = function(user) {
 			$scope.$broadcast('show-errors-check-validity');
@@ -12,13 +12,11 @@
 					.success(function(data) {
 						$window.sessionStorage.jwt = data['token']
 						$rootScope.loggedIn = true
-						console.log($rootScope.loggedIn)
 						$state.go('main')
 					})
 					.error(function(error) {
 						console.log(error)
 			})
 		}
-
 	}])
 }());

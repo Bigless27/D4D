@@ -10,7 +10,13 @@
 				.state('login', {
 					url: '/login',
 					templateUrl: 'app/login/login-partial.html',
-					controller: 'LoginController'
+					controller: 'LoginController',
+					onEnter: ['$state', '$rootScope','AuthenticationService', '$window',
+					 function($state, $rootScope, AuthenticationService, $window) {
+							if($window.sessionStorage['jwt']){
+								$state.go('main')
+							}
+					}]
 				})
 				.state('signUp', {
 					url: '/signUp', 
@@ -21,11 +27,19 @@
 					url: '/main',
 					templateUrl: 'app/main/main-partial.html',
 					controller: 'MainController',
-					onEnter: ['$state', '$rootScope', '$stateParams', '$location', '$window', function($state, $rootScope, $stateParams, $location, $window){
+					onEnter: ['$state', '$rootScope', '$stateParams', '$location', '$window','AuthenticationService',
+					 function($state, $rootScope, $stateParams, $location, $window, AuthenticationService){
 							if($location.search().access_token){
 								$rootScope.loggedIn = true
 								$window.sessionStorage.jwt = $location.search().access_token
 								$location.url($location.path())
+							}
+
+							if(!$window.sessionStorage['jwt']){
+								$state.go('login')
+							}
+							else{
+								$rootScope.loggedIn = true;
 							}
 						}]
 				})
@@ -37,21 +51,19 @@
 		'$rootScope', 'AuthenticationService', function($scope, $state, $http, 
 		$window, $rootScope, AuthenticationService){
 
-			$rootScope.loggedIn = function() {
-				return AuthenticationService.Authenticate($window.sessionStorage['jwt'])
-			}
+			$rootScope.loggedIn = AuthenticationService.Authenticate($window.sessionStorage['jwt'])
 
 			$scope.logout = function() {
 				$window.sessionStorage.clear()
-				$rootScope.loggedIn = false
+				$rootScope.loggedIn = AuthenticationService.Authenticate($window.sessionStorage['jwt'])
 				$state.go('login')
 			}
 		}])
 }());
 (function() {
 	angular.module('DforD')
-	.controller('LoginController', ['$scope', '$state', '$http', '$window',
-	'$rootScope', function($scope, $state, $http, $window, $rootScope) {
+	.controller('LoginController', ['$scope', '$state', '$http', 'AuthenticationService', '$window',
+	'$rootScope', function($scope, $state, $http, AuthenticationService, $window, $rootScope) {
 		
 		$scope.logUserIn = function(user) {
 			$scope.$broadcast('show-errors-check-validity');
@@ -62,14 +74,12 @@
 					.success(function(data) {
 						$window.sessionStorage.jwt = data['token']
 						$rootScope.loggedIn = true
-						console.log($rootScope.loggedIn)
 						$state.go('main')
 					})
 					.error(function(error) {
 						console.log(error)
 			})
 		}
-
 	}])
 }());
 (function() {
@@ -102,17 +112,25 @@
 	    
 	   return{
 	   		Authenticate: function(token) {
-	   			$http.post('auth/authenticate',  {
-					headers: {
-						"Authorization": `Bearer ${token}`
-					} 
-				})
-				.success(function(data) {
-					return true;
-				})
-				.error(function(err){
-					return false;
-				})
+	   			if (!token) {
+	   				return false;
+	   			}
+	   			else{
+		   			$http.get('auth/authenticate',  {
+						headers: {
+							"Authorization": `Bearer ${token}`
+						} 
+					})
+					.success(function(data) {
+						console.log('success')
+						return true;
+					})
+					.error(function(err){
+						console.log('fail')
+						return false;
+					})
+	   			}
+
 	   		}
 
 	   }
