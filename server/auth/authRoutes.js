@@ -1,5 +1,6 @@
 var router = require('express').Router();
 var verifyUser = require('./auth').verifyUser;
+var verifyUserRoute = require('./auth').verifyUserRoute;
 var createToken = require('./auth').signToken;
 var controller = require('./authController');
 var passport = require('passport')
@@ -7,6 +8,8 @@ var passport = require('passport')
 // before we send vack a jwt, lets check
 // the password and username mathch what is in the DB
 router.post('/signin', verifyUser(), controller.signin);
+
+router.post('/authenticate', verifyUserRoute())
 
 
 router.get('/google', passport.authenticate('google', {scope: ['profile', 'email']}));

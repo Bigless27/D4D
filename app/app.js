@@ -21,7 +21,7 @@
 					url: '/main',
 					templateUrl: 'app/main/main-partial.html',
 					controller: 'MainController',
-					onEnter: ['$state', '$stateParams', '$location', '$window', function( $state, $stateParams, $location, $window){
+					onEnter: ['$state', '$stateParams', '$location', '$window', function($state, $stateParams, $location, $window){
 							if($location.search().access_token){
 								$window.sessionStorage.jwt = $location.search().access_token
 								$location.url($location.path())

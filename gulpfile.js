@@ -148,10 +148,10 @@ gulp.task('browserSync', ['nodemon'], function() {
 
 // Dev task with browserSync
 gulp.task('dev', ['browserSync', 'sass', 'scripts', 'minify-css', 'minify-js'], function() {
-    gulp.watch('sass/*.scss', ['sass'])
-    gulp.watch('css/*.css', ['minify-css']);
+    gulp.watch('public/sass/*.scss', ['sass'])
+    gulp.watch('public/css/*.css', ['minify-css']);
     gulp.watch('app/**/*.js', ['scripts'])
-    gulp.watch('js/*.js', ['minify-js']);
+    gulp.watch('public/js/*.js', ['minify-js']);
     // Reloads the browser whenever HTML, Css or JS files change
     gulp.watch('*.html', browserSync.reload);
     gulp.watch('app/**/*.html', browserSync.reload)

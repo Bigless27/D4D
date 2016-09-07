@@ -1,10 +1,9 @@
 (function() {
 	angular.module('DforD')
-	.controller('MainController', ['$scope', '$state', '$http', '$window', 
-		function($scope, $state, $http, $window) {
+	.controller('MainController', ['$scope', '$state', '$http', '$window', 'AuthenticationService',
+		function($scope, $state, $http, $window, AuthenticationService) {
 
 			$scope.me = function() {
-				
 
 				var token = $window.sessionStorage['jwt']
 				
@@ -19,12 +18,6 @@
 				.error(function(err){
 					console.log(err)
 				})
-			}
-
-
-			$scope.logout = function() {
-				$window.sessionStorage.clear()
-				$state.go('login')
 			}
 		
 	}])

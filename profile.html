@@ -42,6 +42,7 @@
 	    <script src="vendor/scrollreveal/scrollreveal.min.js"></script>
 	    <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
 	    <script src="build/js/creative.min.js"></script>
+	    <link rel="stylesheet" type="text/css" href="build/css/profile.css">
 
 	    <!-- JavaScript -->
 	    <script src='build/js/appAll.js'></script>
@@ -55,7 +56,7 @@
 	    <![endif]-->
 
 </head>
-<body id="page-top">
+<body id="page-top" ng-controller = 'NavigationController'>
 
 	 <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
@@ -79,8 +80,11 @@
                     <li>
                         <a class="page-scroll" href="#contact">Contact</a>
                     </li>
-                    <li>
+                    <li ng-show = '!loggedIn'>
                         <a class = "page-scroll" href="profile.html">Login</a> 
+                    </li>
+                    <li ng-show = 'loggedIn'>
+                    	<a  class = 'page-scroll' ng-click = 'logout()'>Logout</a>
                     </li>
                 </ul>
             </div>
