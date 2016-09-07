@@ -1,5 +1,6 @@
 var router = require('express').Router();
 var verifyUser = require('./auth').verifyUser;
+var decodeToken = require('./auth').decodeToken;
 var verifyUserRoute = require('./auth').verifyUserRoute;
 var createToken = require('./auth').signToken;
 var controller = require('./authController');
@@ -9,7 +10,7 @@ var passport = require('passport')
 // the password and username mathch what is in the DB
 router.post('/signin', verifyUser(), controller.signin);
 
-router.post('/authenticate', verifyUserRoute())
+router.get('/authenticate', decodeToken(),verifyUserRoute())
 
 
 router.get('/google', passport.authenticate('google', {scope: ['profile', 'email']}));
