@@ -21,8 +21,9 @@
 					url: '/main',
 					templateUrl: 'app/main/main-partial.html',
 					controller: 'MainController',
-					onEnter: ['$state', '$stateParams', '$location', '$window', function($state, $stateParams, $location, $window){
+					onEnter: ['$state', '$rootScope', '$stateParams', '$location', '$window', function($state, $rootScope, $stateParams, $location, $window){
 							if($location.search().access_token){
+								$rootScope.loggedIn = true
 								$window.sessionStorage.jwt = $location.search().access_token
 								$location.url($location.path())
 							}
@@ -116,6 +117,25 @@
 
 	   }
 	})
+}());
+(function() {
+	angular.module('DforD')
+	.controller('SignupController', ['$scope', '$state','$http','$window', function($scope, $state, $http, $window) {
+		$scope.signUp = function(user) {
+			$scope.$broadcast('show-errors-check-validity')
+
+			if ($scope.userForm.$invalid){return;}
+
+			$http.post('api/users', user)
+				.success(function(data) {
+					$window.sessionStorage.jwt = data['token']
+					$state.go('main')
+				})
+				.error(function(error) {
+					console.log(error)
+				})
+		}
+	}])
 }());
 (function() {
   var showErrorsModule;
@@ -242,23 +262,4 @@
 			}
 		}
 	})
-}());
-(function() {
-	angular.module('DforD')
-	.controller('SignupController', ['$scope', '$state','$http','$window', function($scope, $state, $http, $window) {
-		$scope.signUp = function(user) {
-			$scope.$broadcast('show-errors-check-validity')
-
-			if ($scope.userForm.$invalid){return;}
-
-			$http.post('api/users', user)
-				.success(function(data) {
-					$window.sessionStorage.jwt = data['token']
-					$state.go('main')
-				})
-				.error(function(error) {
-					console.log(error)
-				})
-		}
-	}])
 }());
