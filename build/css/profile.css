@@ -1,4 +1,13 @@
 #profile-container {
-  background-color: rgba(5, 5, 5, 0.8); }
+  background-color: rgba(5, 5, 5, 0.9); }
+  #profile-container h1 {
+    padding: 20px 0px; }
+  #profile-container .welcome {
+    text-align: left;
+    padding: 10px; }
   #profile-container .table-container {
-    width: 500px; }
+    width: 500px;
+    margin: auto;
+    padding-bottom: 20px; }
+    #profile-container .table-container #trans-table th {
+      text-align: center; }

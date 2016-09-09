@@ -8,6 +8,9 @@ var UserSchema = new Schema({
     password: { type: String},
     firstName: { type: String },
     lastName: { type: String },
+    Address: {type: String},
+    Zip: {type: Number},
+    Phone: {type: Number},
     dateJoined: { type: Date, default: Date.now },
     facebook: {
         id: String,

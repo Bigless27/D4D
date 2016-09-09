@@ -1,9 +1,28 @@
 #profile-container{
-	background-color:rgba(5,5,5,0.8);
+	background-color:rgba(5,5,5,0.9);
+
+	h1{
+		padding: 20px 0px;
+	}
+
+	.welcome{
+		text-align: left;
+		padding: 10px;
+	}
 
 	.table-container{
 		width: 500px;
+		margin: auto;
+		padding-bottom: 20px;
+
+		#trans-table{
+			th{
+				text-align: center
+			}
+		}
 
 	}
+
+
 }
 
