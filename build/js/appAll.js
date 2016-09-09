@@ -14,7 +14,7 @@
 					onEnter: ['$state', '$rootScope','AuthenticationService', '$window',
 					 function($state, $rootScope, AuthenticationService, $window) {
 							if($window.sessionStorage['jwt']){
-								$state.go('main')
+								$state.go('profile')
 							}
 					}]
 				})
@@ -23,9 +23,9 @@
 					templateUrl: 'app/signup/signup-partial.html',
 					controller: 'SignupController'
 				})
-				.state('main', {
-					url: '/main',
-					templateUrl: 'app/main/main-partial.html',
+				.state('profile', {
+					url: '/profile',
+					templateUrl: 'app/profile/profile-partial.html',
 					controller: 'MainController',
 					onEnter: ['$state', '$rootScope', '$stateParams', '$location', '$window','AuthenticationService',
 					 function($state, $rootScope, $stateParams, $location, $window, AuthenticationService){
@@ -74,7 +74,7 @@
 					.success(function(data) {
 						$window.sessionStorage.jwt = data['token']
 						$rootScope.loggedIn = true
-						$state.go('main')
+						$state.go('profile')
 					})
 					.error(function(error) {
 						console.log(error)
@@ -147,7 +147,7 @@
 			$http.post('api/users', user)
 				.success(function(data) {
 					$window.sessionStorage.jwt = data['token']
-					$state.go('main')
+					$state.go('profile')
 				})
 				.error(function(error) {
 					console.log(error)

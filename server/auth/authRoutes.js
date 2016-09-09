@@ -21,7 +21,7 @@ router.get('/google/callback', function(req, res, next) {
 
 		if(user) {
 			var token = createToken(user._id)
-			return res.redirect('/profile.html#/main?access_token=' + token)
+			return res.redirect('/profile.html#/profile?access_token=' + token)
 		}
 		else{
 			return res.redirect('/#/login')
@@ -37,7 +37,7 @@ router.get('/facebook/callback', function(req, res, next) {
 
 		if(user) {
 			var token = createToken(user._id)
-			return res.redirect('/profile.html#/main?access_token=' + token)
+			return res.redirect('/profile.html#/profile?access_token=' + token)
 		}
 		else{
 			return res.redirect('/#/login')

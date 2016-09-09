@@ -14,7 +14,7 @@
 					onEnter: ['$state', '$rootScope','AuthenticationService', '$window',
 					 function($state, $rootScope, AuthenticationService, $window) {
 							if($window.sessionStorage['jwt']){
-								$state.go('main')
+								$state.go('profile')
 							}
 					}]
 				})
@@ -23,9 +23,9 @@
 					templateUrl: 'app/signup/signup-partial.html',
 					controller: 'SignupController'
 				})
-				.state('main', {
-					url: '/main',
-					templateUrl: 'app/main/main-partial.html',
+				.state('profile', {
+					url: '/profile',
+					templateUrl: 'app/profile/profile-partial.html',
 					controller: 'MainController',
 					onEnter: ['$state', '$rootScope', '$stateParams', '$location', '$window','AuthenticationService',
 					 function($state, $rootScope, $stateParams, $location, $window, AuthenticationService){

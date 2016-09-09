@@ -1,2 +1,4 @@
 #profile-container {
-  background-color: rgba(5, 5, 5, 0.6); }
+  background-color: rgba(5, 5, 5, 0.8); }
+  #profile-container .table-container {
+    width: 500px; }

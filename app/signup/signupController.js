@@ -9,7 +9,7 @@
 			$http.post('api/users', user)
 				.success(function(data) {
 					$window.sessionStorage.jwt = data['token']
-					$state.go('main')
+					$state.go('profile')
 				})
 				.error(function(error) {
 					console.log(error)
