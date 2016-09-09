@@ -1,4 +1,5 @@
 <header id = 'dallas-header'>
+  <!-- google address validator -->
     <div class="header-content">
         <div class="header-content-inner">
           
@@ -17,7 +18,7 @@
                     <input name='fname' type = "text" ng-model = "user.fname" class = "form-control" id = "fname"
                     placeholder = "First Name" ng-minlength = '2' ng-maxlength="17" required>
                   </div>
-                       <p class="help-block" ng-if="userForm.fname.$error.required">The user's password is required</p>
+                       <p class="help-block" ng-if="userForm.fname.$error.required">First name is required</p>
                        <p class="help-block" ng-show="userForm.fname.$error.minlength">Too short! Must be minimum 2 characters long</p>
                        <p class="help-block" ng-show="userForm.fname.$error.maxlength">Is your name really that long??</p>
                 </div>
@@ -29,7 +30,7 @@
                     <input name='lname' type = "text" ng-model = "user.lname" class = "form-control" id = "lname"
                     placeholder = "Last Name" ng-minlength = '2' ng-maxlength="17" required>
                   </div>
-                       <p class="help-block" ng-if="userForm.lname.$error.required">The user's password is required</p>
+                       <p class="help-block" ng-if="userForm.lname.$error.required">Last name is required</p>
                        <p class="help-block" ng-show="userForm.lname.$error.minlength">Too short! Must be minimum 2 characters long</p>
                        <p class="help-block" ng-show="userForm.lname.$error.maxlength">Is your name really that long??</p>
                 </div>
@@ -70,6 +71,25 @@
                        <p class="help-block" ng-show="userForm.phone.$error.minlength">Must be 10 digits long!</p>
                 </div>
 
+                <div class = "form-group" show-errors>
+                  <label for = "address">Address</label>
+                  <div class = "input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-road"></i></span>
+                    <input phone-input name='address' type = "zip" ng-model = "user.address" class = "form-control" id = "address"
+                    placeholder = "Address" required>
+                  </div>
+                       <p class="help-block" ng-if="userForm.address.$error.required">Address is required</p>
+                </div>
+
+                 <div class = "form-group" show-errors>
+                  <label for = "zip">Zip</label>
+                  <div class = "input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-road"></i></span>
+                    <input phone-input name='zip' type = "zip" ng-model = "user.zip" class = "form-control" id = "zip"
+                    placeholder = "Zip" required>
+                  </div>
+                       <p class="help-block" ng-if="userForm.zip.$error.required">Address is required</p>
+                </div>
 
 
 
