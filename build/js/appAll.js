@@ -75,35 +75,24 @@
 }());
 (function() {
 	angular.module('DforD')
-	.controller('MainController', ['$scope', '$state', '$http', '$window', 'AuthenticationService',
-		function($scope, $state, $http, $window, AuthenticationService) {
-
-			$scope.me = function() {
-
-				var token = $window.sessionStorage['jwt']
-				
-				$http.get('api/users/me', {
-					headers: {
-						"Authorization": `Bearer ${token}`
-					}
-				})
-				.success(function(data){
-						console.log(data)
-				})
-				.error(function(err){
-					console.log(err)
-				})
-			}
-
-			$('.nav-pills li').click(function(e) {
-			    $('.nav-pills li.active').removeClass('active');
-			    var $this = $(this);
-			    if (!$this.hasClass('active')) {
-			        $this.addClass('active');
-			    }
-			    e.preventDefault();
-			});
+	.controller('LoginController', ['$scope', '$state', '$http', 'AuthenticationService', '$window',
+	'$rootScope', function($scope, $state, $http, AuthenticationService, $window, $rootScope) {
 		
+		$scope.logUserIn = function(user) {
+			$scope.$broadcast('show-errors-check-validity');
+
+			if($scope.userForm.$invalid){return;}
+
+			$http.post('auth/signin', user)
+					.success(function(data) {
+						$window.sessionStorage.jwt = data['token']
+						$rootScope.loggedIn = true
+						$state.go('profile.info')
+					})
+					.error(function(error) {
+						console.log(error)
+			})
+		}
 	}])
 }());
 (function() {
@@ -138,24 +127,39 @@
 }());
 (function() {
 	angular.module('DforD')
-	.controller('LoginController', ['$scope', '$state', '$http', 'AuthenticationService', '$window',
-	'$rootScope', function($scope, $state, $http, AuthenticationService, $window, $rootScope) {
-		
-		$scope.logUserIn = function(user) {
-			$scope.$broadcast('show-errors-check-validity');
+	.controller('MainController', ['$scope', '$state', '$http', '$window', 'AuthenticationService',
+		function($scope, $state, $http, $window, AuthenticationService) {
 
-			if($scope.userForm.$invalid){return;}
+			$scope.me = function() {
 
-			$http.post('auth/signin', user)
-					.success(function(data) {
-						$window.sessionStorage.jwt = data['token']
-						$rootScope.loggedIn = true
-						$state.go('profile.info')
-					})
-					.error(function(error) {
-						console.log(error)
+				var token = $window.sessionStorage['jwt']
+				
+				$http.get('api/users/me', {
+					headers: {
+						"Authorization": `Bearer ${token}`
+					}
+				})
+				.success(function(data){
+						console.log(data)
+				})
+				.error(function(err){
+					console.log(err)
+				})
+			}
+
+			angular.element(document).ready(function() {
+				$('.nav-pills li').first().addClass('active')
+
+				$('.nav-pills li').click(function(e) {
+				    $('.nav-pills li.active').removeClass('active');
+				    var $this = $(this);
+				    if (!$this.hasClass('active')) {
+				        $this.addClass('active');
+				    }
+				    e.preventDefault();
+				});
 			})
-		}
+		
 	}])
 }());
 (function() {
