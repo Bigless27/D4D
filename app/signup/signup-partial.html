@@ -23,7 +23,9 @@
                     id = "fname"
                     placeholder = "First Name"
                     ng-minlength = '2'
-                    ng-maxlength="17" required>
+                    ng-maxlength="17" 
+                    required
+                    >
                   </div>
                        <p class="help-block" ng-if="userForm.fname.$error.required">First name is required</p>
                        <p class="help-block" ng-show="userForm.fname.$error.minlength">Too short! Must be minimum 2 characters long</p>
@@ -43,7 +45,8 @@
                     placeholder = "Last Name"
                     ng-minlength = '2'
                     ng-maxlength="17" 
-                    required>
+                    required
+                    >
                   </div>
                        <p class="help-block" ng-if="userForm.lname.$error.required">Last name is required</p>
                        <p class="help-block" ng-show="userForm.lname.$error.minlength">Too short! Must be minimum 2 characters long</p>
@@ -54,8 +57,15 @@
                   <label for = "email" class = 'control-label'>Email</label>
                   <div class = "input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                    <input name = 'email' type = "email" ng-model = "user.email" class = "form-control"
-                    id = "email" placeholder = "Email" required>
+                    <input 
+                    name = 'email'
+                    type = "email"
+                    ng-model = "user.email"
+                    class = "form-control"
+                    id = "email"
+                    placeholder = "Email"
+                    required
+                    >
                         </div>
                         <p class="help-block" ng-if= "userForm.email.$error.required">The user's email is required</p>
                         <p class="help-block" ng-if= "userForm.email.$error.email">Not a valid email</p>
@@ -66,8 +76,17 @@
                   <label for = "password">Password</label>
                   <div class = "input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                    <input name='password' type = "password" ng-model = "user.password" class = "form-control" id = "password"
-                    placeholder = "Password" ng-minlength = '4' ng-maxlength="10" required>
+                    <input 
+                    name='password'
+                    type = "password"
+                    ng-model = "user.password"
+                    class = "form-control"
+                    id = "password"
+                    placeholder = "Password"
+                    ng-minlength = '4'
+                    ng-maxlength="10"
+                    required
+                    >
                         </div>
                        <p class="help-block" ng-if="userForm.password.$error.required">The user's password is required</p>
                        <p class="help-block" ng-show="userForm.password.$error.minlength">Too short! Must be minimum 4 characters long</p>
@@ -79,8 +98,17 @@
                   <label for = "phone">Phone</label>
                   <div class = "input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
-                    <input phone-input name='phone' type = "phone" ng-model = "user.phone" class = "form-control" id = "phone"
-                    placeholder = "Phone" ng-minlength = '14' required>
+                    <input 
+                    phone-input 
+                    name='phone' 
+                    type = "phone"
+                    ng-model = "user.phone"
+                    class = "form-control"
+                    id = "phone"
+                    placeholder = "Phone"
+                    ng-minlength = '14'
+                    required
+                    >
                   </div>
                        <p class="help-block" ng-if="userForm.phone.$error.required">Phone Number is required</p>
                        <p class="help-block" ng-show="userForm.phone.$error.minlength">Must be 10 digits long!</p>

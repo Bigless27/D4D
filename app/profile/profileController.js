@@ -19,6 +19,15 @@
 					console.log(err)
 				})
 			}
+
+			$('.nav-pills li').click(function(e) {
+			    $('.nav-pills li.active').removeClass('active');
+			    var $this = $(this);
+			    if (!$this.hasClass('active')) {
+			        $this.addClass('active');
+			    }
+			    e.preventDefault();
+			});
 		
 	}])
 }());
