@@ -2,7 +2,7 @@
 	background-color:rgba(5,5,5,0.9);
 
 	h1{
-		padding: 20px 0px;
+		padding: 15px 0px 40px 0px;
 	}
 
 	.welcome{
@@ -22,7 +22,13 @@
 		}
 
 	}
+}
 
-
+#dallas-header{
+	.nav{
+			a{
+				color: orange;
+			}
+		}
 }
 

@@ -14,7 +14,7 @@
 					onEnter: ['$state', '$rootScope','AuthenticationService', '$window',
 					 function($state, $rootScope, AuthenticationService, $window) {
 							if($window.sessionStorage['jwt']){
-								$state.go('profile')
+								$state.go('profile.info')
 							}
 					}]
 				})
@@ -27,6 +27,7 @@
 					url: '/profile',
 					templateUrl: 'app/profile/profile-partial.html',
 					controller: 'MainController',
+					abstract: true,
 					onEnter: ['$state', '$rootScope', '$stateParams', '$location', '$window','AuthenticationService',
 					 function($state, $rootScope, $stateParams, $location, $window, AuthenticationService){
 							if($location.search().access_token){
@@ -42,6 +43,18 @@
 								$rootScope.loggedIn = true;
 							}
 						}]
+				})
+				.state('profile.info', {
+					url: '/info',
+					templateUrl: 'app/profile/userinfo/info-partial.html'
+				})
+				.state('profile.transactions', {
+					url: '/transactions',
+					templateUrl: 'app/profile/transactions/transaction-partial.html'
+				})
+				.state('profile.billing', {
+					url: '/billing',
+					templateUrl: 'app/profile/billing/billing-partial.html'
 				})
 		}])
 }());

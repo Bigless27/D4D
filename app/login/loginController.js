@@ -12,7 +12,7 @@
 					.success(function(data) {
 						$window.sessionStorage.jwt = data['token']
 						$rootScope.loggedIn = true
-						$state.go('profile')
+						$state.go('profile.info')
 					})
 					.error(function(error) {
 						console.log(error)

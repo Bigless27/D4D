@@ -2,96 +2,14 @@
     <div class="header-content">
         <div class="header-content-inner">
         	<ul class="nav nav-pills">
-			  <li><a class = 'active' href="#">User info</a></li>
-			  <li><a href="#">Transactions</a></li>
-			  <li><a href="#">Billing</a></li>
+			  <li><a class = 'active' ui-sref = 'profile.info' >User info</a></li>
+			  <li><a ui-sref = 'profile.transactions'>Transactions</a></li>
+			  <li><a ui-sref = 'profile.billing'>Billing</a></li>
 			</ul>
         	<div id = 'profile-container' class = 'contatiner'>
         		<div class ='welcome'>Welcome Blank</div>
-	        	<h1>Profile </h1>
 
-	        	<div class = 'table-container'>
-		        	<table class = 'table table'>
-		        			<tr>
-		        				<th>First Name:</th>
-		        				<td>Name</td>
-		        				<td>
-		        					<a href="">Edit</a>
-		        				</td>
-		        			</tr>
-		        			<tr>
-		        				<th>Last Name:</th>
-		        				<td>Name</td>
-		        				<td>
-		        					<a href="">Edit</a>
-		        				</td>
-		        			</tr>
-		        			<tr>
-		        				<th>Email:</th>
-		        				<td>Name</td>
-		        				<td>
-		        					<a href="">Edit</a>
-		        				</td>
-		        			</tr>
-		        			<tr>
-		        				<th>Address:</th>
-		        				<td>Name</td>
-		        				<td>
-		        					<a href="">Edit</a>
-		        				</td>
-		        			</tr>
-		        			<tr>
-		        				<th>Zip:</th>
-		        				<td>Name</td>
-		        				<td>
-		        					<a href="">Edit</a>
-		        				</td>
-		        			</tr>
-		        			<tr>
-		        				<th>Phone:</th>
-		        				<td>867-5309</td>
-		        				<td>
-		        					<a href="">Edit</a>
-		        				</td>
-		        			</tr>
-		        			<tr>
-		        				<th>Date Joined:</th>
-		        				<td>867-5309</td>
-		        				<td>
-		        					<a href="">Edit</a>
-		        				</td>
-		        			</tr>
-		        	</table>
-		        </div>
-
-		        <h1>Transactions</h1>
-
-		        <div class = 'table-container'>
-		        	<table id = 'trans-table' class="table table">
-						  <thead>
-						    <tr>
-						      <th>Name</th>
-						      <th>Amount</th>
-						      <th>Date</th>
-						      <th>Status</th>
-						    </tr>
-						  </thead>
-						  <tbody>
-						    <tr>
-						      <td>Lesson</td>
-						      <td>70</td>
-						      <td>7/7/2017 7:45am</td>
-						      <td>Complete</td>
-						    </tr>
-						     <tr>
-						      <td>Lesson</td>
-						      <td>70</td>
-						      <td>7/7/2017 7:45am</td>
-						      <td>Complete</td>
-						    </tr>
-						  </tbody>
-					</table>	
-		        </div>
+	        	<div ui-view></div>
          </div>
         </div>
     </div>

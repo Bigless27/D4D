@@ -14,7 +14,7 @@
 					onEnter: ['$state', '$rootScope','AuthenticationService', '$window',
 					 function($state, $rootScope, AuthenticationService, $window) {
 							if($window.sessionStorage['jwt']){
-								$state.go('profile')
+								$state.go('profile.info')
 							}
 					}]
 				})
@@ -27,6 +27,7 @@
 					url: '/profile',
 					templateUrl: 'app/profile/profile-partial.html',
 					controller: 'MainController',
+					abstract: true,
 					onEnter: ['$state', '$rootScope', '$stateParams', '$location', '$window','AuthenticationService',
 					 function($state, $rootScope, $stateParams, $location, $window, AuthenticationService){
 							if($location.search().access_token){
@@ -42,6 +43,18 @@
 								$rootScope.loggedIn = true;
 							}
 						}]
+				})
+				.state('profile.info', {
+					url: '/info',
+					templateUrl: 'app/profile/userinfo/info-partial.html'
+				})
+				.state('profile.transactions', {
+					url: '/transactions',
+					templateUrl: 'app/profile/transactions/transaction-partial.html'
+				})
+				.state('profile.billing', {
+					url: '/billing',
+					templateUrl: 'app/profile/billing/billing-partial.html'
 				})
 		}])
 }());
@@ -59,58 +72,6 @@
 				$state.go('login')
 			}
 		}])
-}());
-(function() {
-	angular.module('DforD')
-	.controller('LoginController', ['$scope', '$state', '$http', 'AuthenticationService', '$window',
-	'$rootScope', function($scope, $state, $http, AuthenticationService, $window, $rootScope) {
-		
-		$scope.logUserIn = function(user) {
-			$scope.$broadcast('show-errors-check-validity');
-
-			if($scope.userForm.$invalid){return;}
-
-			$http.post('auth/signin', user)
-					.success(function(data) {
-						$window.sessionStorage.jwt = data['token']
-						$rootScope.loggedIn = true
-						$state.go('profile')
-					})
-					.error(function(error) {
-						console.log(error)
-			})
-		}
-	}])
-}());
-(function() {
-    angular.module('DforD')
-    .factory('AuthenticationService', function($http) {
-	    
-	   return{
-	   		Authenticate: function(token) {
-	   			if (!token) {
-	   				return false;
-	   			}
-	   			else{
-		   			$http.get('auth/authenticate',  {
-						headers: {
-							"Authorization": `Bearer ${token}`
-						} 
-					})
-					.success(function(data) {
-						console.log('success')
-						return true;
-					})
-					.error(function(err){
-						console.log('fail')
-						return false;
-					})
-	   			}
-
-	   		}
-
-	   }
-	})
 }());
 (function() {
 	angular.module('DforD')
@@ -146,6 +107,58 @@
 	}])
 }());
 (function() {
+    angular.module('DforD')
+    .factory('AuthenticationService', function($http) {
+	    
+	   return{
+	   		Authenticate: function(token) {
+	   			if (!token) {
+	   				return false;
+	   			}
+	   			else{
+		   			$http.get('auth/authenticate',  {
+						headers: {
+							"Authorization": `Bearer ${token}`
+						} 
+					})
+					.success(function(data) {
+						console.log('success')
+						return true;
+					})
+					.error(function(err){
+						console.log('fail')
+						return false;
+					})
+	   			}
+
+	   		}
+
+	   }
+	})
+}());
+(function() {
+	angular.module('DforD')
+	.controller('LoginController', ['$scope', '$state', '$http', 'AuthenticationService', '$window',
+	'$rootScope', function($scope, $state, $http, AuthenticationService, $window, $rootScope) {
+		
+		$scope.logUserIn = function(user) {
+			$scope.$broadcast('show-errors-check-validity');
+
+			if($scope.userForm.$invalid){return;}
+
+			$http.post('auth/signin', user)
+					.success(function(data) {
+						$window.sessionStorage.jwt = data['token']
+						$rootScope.loggedIn = true
+						$state.go('profile.info')
+					})
+					.error(function(error) {
+						console.log(error)
+			})
+		}
+	}])
+}());
+(function() {
 	angular.module('DforD')
 	.controller('SignupController', ['$scope', '$state','$http','$window', function($scope, $state, $http, $window) {
 		$scope.signUp = function(user) {
@@ -156,7 +169,7 @@
 			$http.post('api/users', user)
 				.success(function(data) {
 					$window.sessionStorage.jwt = data['token']
-					$state.go('profile')
+					$state.go('profile.info')
 				})
 				.error(function(error) {
 					console.log(error)
