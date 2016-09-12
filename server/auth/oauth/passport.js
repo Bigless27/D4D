@@ -18,7 +18,7 @@ module.exports = function(passport) {
 	passport.use(new FacebookStrategy({
 	    clientID: configAuth.facebookAuth.clientID,
 	    clientSecret: configAuth.facebookAuth.clientSecret,
-	    profileFields: ['id', 'displayName', 'email'],
+	    profileFields: ['id', 'displayName', 'email', 'name'],
 	    callbackURL: configAuth.facebookAuth.callbackURL
 	  },
 	  function(accessToken, refreshToken, profile, done) {
@@ -35,13 +35,14 @@ module.exports = function(passport) {
 	    				newUser.facebook.name = profile.name.givenName + ' ' + profile.name.familyName;
 	    				newUser.facebook.email = profile.emails[0].value;
 	    				newUser.email = profile.emails[0].value;
+	    				newUser.firstName = profile.name.givenName
+	    				newUser.lastName = profile.name.familyName
 
 	    				newUser.save(function(err){
 	    					if(err)
 	    						throw err;
 	    					return done(null, newUser);
 	    				})
-	    				console.log(profile)
 	    			}
 	    		});
 	    	});
@@ -58,6 +59,7 @@ module.exports = function(passport) {
 	  function(accessToken, refreshToken, profile, done) {
 	    	process.nextTick(function(){
 	    		User.findOne({'google.id': profile.id}, function(err, user){
+	    			console.log(profile.name.familyName)
 	    			if(err)
 	    				return done(err);
 	    			if(user)
@@ -69,6 +71,9 @@ module.exports = function(passport) {
 	    				newUser.google.name = profile.displayName;
 	    				newUser.google.email = profile.emails[0].value;
 	    				newUser.email = profile.emails[0].value;
+	    				newUser.firstName = profile.name.familyName;
+	    				newUser.lastName = profile.name.givenName;
+
 
 	    				newUser.save(function(err){
 	    					if(err)
