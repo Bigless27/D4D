@@ -3,6 +3,13 @@ var Schema = mongoose.Schema
 var bcrypt = require('bcrypt') 
 var jwt = require('express-jwt');
 
+var transactionsSchema = new Schema({
+    name: {type: String},
+    amount: {type: Number},
+    date: {type: Date},
+    status: {type: String}
+})
+
 var UserSchema = new Schema({
     email: { type: String, unique: true, required: true, index: true },
     password: { type: String},
@@ -22,7 +29,8 @@ var UserSchema = new Schema({
         token: String,
         email: String,
         name: String
-    }
+    },
+    transactions: [transactionsSchema]
 });
 
 UserSchema.pre('save', function(next) {
