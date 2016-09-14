@@ -12,6 +12,7 @@
 					}
 				})
 				.success(function(data){
+						console.log(data)
 						$scope.user = data
 				})
 				.error(function(err){
@@ -20,6 +21,8 @@
 			}
 
 			getProfile()
+
+			
 
 			angular.element(document).ready(function() {
 				$('.nav-pills li').first().addClass('active')

@@ -1,53 +1,63 @@
 <h1>Profile</h1>
 <div class = 'table-container'>
-		        	<table class = 'table table'>
+		        	<table class = 'table table' id = 'profile-table'>
 		        			<tr>
 		        				<th>First Name:</th>
-		        				<td>{{user.firstName}}</td>
 		        				<td>
-		        					<a href="">Edit</a>
+		        					<span editable-text="user.firstName" e-form="firstName">{{user.firstName}}</span>
+		        				</td>
+		        				<td>
+		        					<a href="" ng-click="firstName.$show()" ng-hide="firstName.$visible">Edit</a>
 		        				</td>
 		        			</tr>
 		        			<tr>
 		        				<th>Last Name:</th>
-		        				<td>{{user.lastName}}</td>
 		        				<td>
-		        					<a href="">Edit</a>
+		        					<span editable-text="user.lastName" e-form="lastName">{{user.lastName}}</span>
+		        				</td>
+		        				<td>
+		        					<a href="" ng-click="lastName.$show()" ng-hide="lastName.$visible">Edit</a>
 		        				</td>
 		        			</tr>
 		        			<tr>
 		        				<th>Email:</th>
-		        				<td>{{user.email}}</td>
+		        				<td><span editable-text="user.email" e-form="email">{{user.email}}</span></td></td>
 		        				<td>
-		        					<a href="">Edit</a>
+		        					<a href="" ng-click="email.$show()" ng-hide="email.$visible">Edit</a>
 		        				</td>
 		        			</tr>
 		        			<tr>
 		        				<th>Address:</th>
-		        				<td>{{user.address}}</td>
 		        				<td>
-		        					<a href="">Edit</a>
+		        					<span editable-text="user.address" e-form="address">{{user.address}}</span>
+		        				</td>
+		        				<td>
+		        					<a href="" ng-click="address.$show()" ng-hide="address.$visible">Edit</a>
 		        				</td>
 		        			</tr>
 		        			<tr>
 		        				<th>Zip:</th>
-		        				<td>{{user.zip}}</td>
 		        				<td>
-		        					<a href="">Edit</a>
+		        					<span editable-text="user.zip" e-form="zip">{{user.zip}}</span>
+		        				</td>
+		        				<td>
+		        					<a href="" ng-click="zip.$show()" ng-hide="zip.$visible">Edit</a>
 		        				</td>
 		        			</tr>
 		        			<tr>
 		        				<th>Phone:</th>
-		        				<td>{{user.phone}}</td>
 		        				<td>
-		        					<a href="">Edit</a>
+		        					<span editable-text="user.phone" e-form="phone">{{user.phone}}</span>
+		        				</td>
+		        				<td>
+		        					<a href="" ng-click="phone.$show()" ng-hide="phone.$visible">Edit</a>
 		        				</td>
 		        			</tr>
 		        			<tr>
 		        				<th>Member Since:</th>
 		        				<td>{{user.dateJoined | date: medium }}</td>
 		        				<td>
-		        					<a href="">Edit</a>
+
 		        				</td>
 		        			</tr>
 		        	</table>

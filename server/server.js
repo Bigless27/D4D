@@ -32,6 +32,7 @@ app.get('/', function(req, res) {
 app.use('/api', api);
 app.use('/auth', auth);
 app.use('/node_modules', express.static(path.join(__dirname, '../node_modules')));
+app.use('/bower_components', express.static(path.join(__dirname, '../bower_components')));
 app.use('/vendor', express.static(path.join(__dirname, '../vendor')))
 app.use('/build', express.static(path.join(__dirname, '../build')))
 app.use('/parallax', express.static(path.join(__dirname, '../parallax')))

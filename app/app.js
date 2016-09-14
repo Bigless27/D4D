@@ -1,5 +1,5 @@
 (function() {
-	angular.module('DforD', ['ui.router', 'ui.bootstrap.showErrors'])
+	angular.module('DforD', ['ui.router', 'ui.bootstrap.showErrors', "xeditable"])
 	.config(['$stateProvider', '$urlRouterProvider', 'showErrorsConfigProvider', 
 		function($stateProvider, $urlRouterProvider, showErrorsConfigProvider) {
 
@@ -57,4 +57,7 @@
 					templateUrl: 'app/profile/billing/billing-partial.html'
 				})
 		}])
+	.run(function(editableOptions) {
+	  editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
+	})
 }());

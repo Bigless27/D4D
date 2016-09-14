@@ -1,5 +1,5 @@
 (function() {
-	angular.module('DforD', ['ui.router', 'ui.bootstrap.showErrors'])
+	angular.module('DforD', ['ui.router', 'ui.bootstrap.showErrors', "xeditable"])
 	.config(['$stateProvider', '$urlRouterProvider', 'showErrorsConfigProvider', 
 		function($stateProvider, $urlRouterProvider, showErrorsConfigProvider) {
 
@@ -57,6 +57,9 @@
 					templateUrl: 'app/profile/billing/billing-partial.html'
 				})
 		}])
+	.run(function(editableOptions) {
+	  editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
+	})
 }());
 (function() {
 	angular.module('DforD')
@@ -97,25 +100,6 @@
 }());
 (function() {
 	angular.module('DforD')
-	.controller('SignupController', ['$scope', '$state','$http','$window', function($scope, $state, $http, $window) {
-		$scope.signUp = function(user) {
-			$scope.$broadcast('show-errors-check-validity')
-
-			if ($scope.userForm.$invalid){return;}
-
-			$http.post('api/users', user)
-				.success(function(data) {
-					$window.sessionStorage.jwt = data['token']
-					$state.go('profile.info')
-				})
-				.error(function(error) {
-					console.log(error)
-				})
-		}
-	}])
-}());
-(function() {
-	angular.module('DforD')
 	.controller('MainController', ['$scope', '$state', '$http', '$window', 'AuthenticationService',
 		function($scope, $state, $http, $window, AuthenticationService) {
 
@@ -128,6 +112,7 @@
 					}
 				})
 				.success(function(data){
+						console.log(data)
 						$scope.user = data
 				})
 				.error(function(err){
@@ -136,6 +121,8 @@
 			}
 
 			getProfile()
+
+			
 
 			angular.element(document).ready(function() {
 				$('.nav-pills li').first().addClass('active')
@@ -181,6 +168,25 @@
 
 	   }
 	})
+}());
+(function() {
+	angular.module('DforD')
+	.controller('SignupController', ['$scope', '$state','$http','$window', function($scope, $state, $http, $window) {
+		$scope.signUp = function(user) {
+			$scope.$broadcast('show-errors-check-validity')
+
+			if ($scope.userForm.$invalid){return;}
+
+			$http.post('api/users', user)
+				.success(function(data) {
+					$window.sessionStorage.jwt = data['token']
+					$state.go('profile.info')
+				})
+				.error(function(error) {
+					console.log(error)
+				})
+		}
+	}])
 }());
 (function() {
     angular.module('DforD')
