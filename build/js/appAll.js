@@ -14,7 +14,7 @@
 					onEnter: ['$state', '$rootScope','AuthenticationService', '$window',
 					 function($state, $rootScope, AuthenticationService, $window) {
 							if($window.sessionStorage['jwt']){
-								$state.go('main')
+								$state.go('profile.info')
 							}
 					}]
 				})
@@ -23,10 +23,11 @@
 					templateUrl: 'app/signup/signup-partial.html',
 					controller: 'SignupController'
 				})
-				.state('main', {
-					url: '/main',
-					templateUrl: 'app/main/main-partial.html',
+				.state('profile', {
+					url: '/profile',
+					templateUrl: 'app/profile/profile-partial.html',
 					controller: 'MainController',
+					abstract: true,
 					onEnter: ['$state', '$rootScope', '$stateParams', '$location', '$window','AuthenticationService',
 					 function($state, $rootScope, $stateParams, $location, $window, AuthenticationService){
 							if($location.search().access_token){
@@ -42,6 +43,18 @@
 								$rootScope.loggedIn = true;
 							}
 						}]
+				})
+				.state('profile.info', {
+					url: '/info',
+					templateUrl: 'app/profile/userinfo/info-partial.html'
+				})
+				.state('profile.transactions', {
+					url: '/transactions',
+					templateUrl: 'app/profile/transactions/transaction-partial.html'
+				})
+				.state('profile.billing', {
+					url: '/billing',
+					templateUrl: 'app/profile/billing/billing-partial.html'
 				})
 		}])
 }());
@@ -74,7 +87,7 @@
 					.success(function(data) {
 						$window.sessionStorage.jwt = data['token']
 						$rootScope.loggedIn = true
-						$state.go('main')
+						$state.go('profile.info')
 					})
 					.error(function(error) {
 						console.log(error)
@@ -84,11 +97,29 @@
 }());
 (function() {
 	angular.module('DforD')
+	.controller('SignupController', ['$scope', '$state','$http','$window', function($scope, $state, $http, $window) {
+		$scope.signUp = function(user) {
+			$scope.$broadcast('show-errors-check-validity')
+
+			if ($scope.userForm.$invalid){return;}
+
+			$http.post('api/users', user)
+				.success(function(data) {
+					$window.sessionStorage.jwt = data['token']
+					$state.go('profile.info')
+				})
+				.error(function(error) {
+					console.log(error)
+				})
+		}
+	}])
+}());
+(function() {
+	angular.module('DforD')
 	.controller('MainController', ['$scope', '$state', '$http', '$window', 'AuthenticationService',
 		function($scope, $state, $http, $window, AuthenticationService) {
 
-			$scope.me = function() {
-
+			function getProfile() {
 				var token = $window.sessionStorage['jwt']
 				
 				$http.get('api/users/me', {
@@ -97,12 +128,27 @@
 					}
 				})
 				.success(function(data){
-						console.log(data)
+						$scope.user = data
 				})
 				.error(function(err){
 					console.log(err)
 				})
 			}
+
+			getProfile()
+
+			angular.element(document).ready(function() {
+				$('.nav-pills li').first().addClass('active')
+
+				$('.nav-pills li').click(function(e) {
+				    $('.nav-pills li.active').removeClass('active');
+				    var $this = $(this);
+				    if (!$this.hasClass('active')) {
+				        $this.addClass('active');
+				    }
+				    e.preventDefault();
+				});
+			})
 		
 	}])
 }());
@@ -137,23 +183,84 @@
 	})
 }());
 (function() {
-	angular.module('DforD')
-	.controller('SignupController', ['$scope', '$state','$http','$window', function($scope, $state, $http, $window) {
-		$scope.signUp = function(user) {
-			$scope.$broadcast('show-errors-check-validity')
+    angular.module('DforD')
+    .directive('phoneInput', function($filter, $browser) {
+        return {
+            require: 'ngModel',
+            link: function($scope, $element, $attrs, ngModelCtrl) {
+                var listener = function() {
+                    var value = $element.val().replace(/[^0-9]/g, '');
+                    $element.val($filter('tel')(value, false));
+                };
 
-			if ($scope.userForm.$invalid){return;}
+                // This runs when we update the text field
+                ngModelCtrl.$parsers.push(function(viewValue) {
+                    return viewValue.replace(/[^0-9]/g, '').slice(0,10);
+                });
 
-			$http.post('api/users', user)
-				.success(function(data) {
-					$window.sessionStorage.jwt = data['token']
-					$state.go('main')
-				})
-				.error(function(error) {
-					console.log(error)
-				})
-		}
-	}])
+                // This runs when the model gets updated on the scope directly and keeps our view in sync
+                ngModelCtrl.$render = function() {
+                    $element.val($filter('tel')(ngModelCtrl.$viewValue, false));
+                };
+
+                $element.bind('change', listener);
+                $element.bind('keydown', function(event) {
+                    var key = event.keyCode;
+                    // If the keys include the CTRL, SHIFT, ALT, or META keys, or the arrow keys, do nothing.
+                    // This lets us support copy and paste too
+                    if (key == 91 || (15 < key && key < 19) || (37 <= key && key <= 40)){
+                        return;
+                    }
+                    $browser.defer(listener); // Have to do this or changes don't get picked up properly
+                });
+
+                $element.bind('paste cut', function() {
+                    $browser.defer(listener);
+                });
+            }
+
+        };
+    })
+    .filter('tel', function () {
+        return function (tel) {
+            if (!tel) { return ''; }
+
+            var value = tel.toString().trim().replace(/^\+/, '');
+
+            if (value.match(/[^0-9]/)) {
+                return tel;
+            }
+
+            var country, city, number;
+
+            switch (value.length) {
+                case 1:
+                case 2:
+                case 3:
+                    city = value;
+                    break;
+
+                default:
+                    city = value.slice(0, 3);
+                    number = value.slice(3);
+            }
+
+            if(number){
+                if(number.length>3){
+                    number = number.slice(0, 3) + '-' + number.slice(3,7);
+                }
+                else{
+                    number = number;
+                }
+
+                return ("(" + city + ") " + number).trim();
+            }
+            else{
+                return "(" + city;
+            }
+
+        };
+    });
 }());
 (function() {
   var showErrorsModule;

@@ -1,52 +1,245 @@
 <header id = 'dallas-header'>
+  <!-- google address validator -->
     <div class="header-content">
         <div class="header-content-inner">
           
 
          <div id = "login-form" class = "login jumbotron center-block" >
 
-  <h1 class = 'login-title'>Signup</h1>
+              <h1 class = 'login-title'>Signup</h1>
 
 
-  <form name ="userForm" role = "form" data-toggle = 'validator'>
-    <div class = "form-group" show-errors>
-      <label for = "email" class = 'control-label'>Email</label>
-      <div class = "input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-        <input name = 'email' type = "email" ng-model = "user.email" class = "form-control"
-        id = "email" placeholder = "Email" required>
+              <form name ="userForm" role = "form" data-toggle = 'validator'>
+
+                <div class = "form-group" show-errors>
+                  <label for = "First Name">First Name</label>
+                  <div class = "input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input 
+                    name='firstName'
+                    type = "text"
+                    ng-model = "user.firstName"
+                    class = "form-control"
+                    id = "fname"
+                    placeholder = "First Name"
+                    ng-minlength = '2'
+                    ng-maxlength="17" 
+                    required
+                    >
+                  </div>
+                       <p class="help-block" ng-if="userForm.firstName.$error.required">First name is required</p>
+                       <p class="help-block" ng-show="userForm.firstName.$error.minlength">Too short! Must be minimum 2 characters long</p>
+                       <p class="help-block" ng-show="userForm.firstName.$error.maxlength">Is your name really that long??</p>
+                </div>
+
+                 <div class = "form-group" show-errors>
+                  <label for = "Last Name">Last Name</label>
+                  <div class = "input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input 
+                    name='lastName'
+                    type = "text"
+                    ng-model = "user.lastName"
+                    class = "form-control"
+                    id = "lastName"
+                    placeholder = "Last Name"
+                    ng-minlength = '2'
+                    ng-maxlength="17" 
+                    required
+                    >
+                  </div>
+                       <p class="help-block" ng-if="userForm.lastName.$error.required">Last name is required</p>
+                       <p class="help-block" ng-show="userForm.lastName.$error.minlength">Too short! Must be minimum 2 characters long</p>
+                       <p class="help-block" ng-show="userForm.lastName.$error.maxlength">Is your name really that long??</p>
+                </div>
+
+                <div class = "form-group" show-errors>
+                  <label for = "email" class = 'control-label'>Email</label>
+                  <div class = "input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                    <input 
+                    name = 'email'
+                    type = "email"
+                    ng-model = "user.email"
+                    class = "form-control"
+                    id = "email"
+                    placeholder = "Email"
+                    required
+                    >
+                        </div>
+                        <p class="help-block" ng-if= "userForm.email.$error.required">The user's email is required</p>
+                        <p class="help-block" ng-if= "userForm.email.$error.email">Not a valid email</p>
+                </div>
+
+
+                <div class = "form-group" show-errors>
+                  <label for = "password">Password</label>
+                  <div class = "input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                    <input 
+                    name='password'
+                    type = "password"
+                    ng-model = "user.password"
+                    class = "form-control"
+                    id = "password"
+                    placeholder = "Password"
+                    ng-minlength = '4'
+                    ng-maxlength="10"
+                    required
+                    >
+                        </div>
+                       <p class="help-block" ng-if="userForm.password.$error.required">The user's password is required</p>
+                       <p class="help-block" ng-show="userForm.password.$error.minlength">Too short! Must be minimum 4 characters long</p>
+                       <p class="help-block" ng-show="userForm.password.$error.maxlength">Too long!</p>
+                </div>
+
+
+               <div class = "form-group" show-errors>
+                  <label for = "phone">Phone</label>
+                  <div class = "input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+                    <input 
+                    phone-input 
+                    name='phone' 
+                    type = "phone"
+                    ng-model = "user.phone"
+                    class = "form-control"
+                    id = "phone"
+                    placeholder = "Phone"
+                    ng-minlength = '14'
+                    required
+                    >
+                  </div>
+                       <p class="help-block" ng-if="userForm.phone.$error.required">Phone Number is required</p>
+                       <p class="help-block" ng-show="userForm.phone.$error.minlength">Must be 10 digits long!</p>
+                </div>
+
+                <div class = "form-group" show-errors>
+                  <label for = "address">Address</label>
+                  <div class = "input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-road"></i></span>
+                    <input required
+                      name='address'
+                      type = "zip"
+                      ng-model = "user.address"
+                      ng-pattern = ""
+                      class = "form-control"
+                      id = "address"
+                      placeholder = "Address"
+                      >
+                  </div>
+                       <p class="help-block" ng-if="userForm.address.$error.required">Address is required</p>
+                       <p class="help-block" ng-if="userForm.address.$error.pattern">Address isn't valid</p>
+                </div>
+
+               <div class = "form-group" show-errors>
+                <label for = "zip">Zip</label>
+                <div class = "input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-road"></i></span>
+                  <input required
+                  name='zip'
+                  type = "zip"
+                  ng-model = "user.zip"
+                  class = "form-control"
+                  id = "zip"
+                  placeholder = "Zip"
+                  >
+                </div>
+                     <p class="help-block" ng-if="userForm.zip.$error.required">Zip is required</p>
+              </div>
+
+               <div class = "form-group" show-errors>
+                <label for = "city">City</label>
+                <div class = "input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-road"></i></span>
+                  <input required
+                  name='city'
+                  type = "city"
+                  ng-model = "user.city"
+                  class = "form-control"
+                  id = "city"
+                  placeholder = "City"
+                  >
+                </div>
+                     <p class="help-block" ng-if="userForm.city.$error.required">City is required</p>
+              </div>
+
+              <div class = "form-group" show-errors>
+                <label for = "state">State</label>
+                <div class = "input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-road"></i></span>
+                 <select 
+                  name="state"
+                  class="form-control selectpicker"
+                  ng-model = 'user.state' 
+                  required >
+                    <option>Please select your city</option>
+                    <option>Alabama</option>
+                    <option>Alaska</option>
+                    <option>Arizona</option>
+                    <option>Arkansas</option>
+                    <option>California</option>
+                    <option>Colorado</option>
+                    <option>Connecticut</option>
+                    <option>Delaware</option>
+                    <option>District of Columbia</option>
+                    <option> Florida</option>
+                    <option>Georgia</option>
+                    <option>Hawaii</option>
+                    <option>Idaho</option>
+                    <option>Illinois</option>
+                    <option>Indiana</option>
+                    <option>Iowa</option>
+                    <option> Kansas</option>
+                    <option>Kentucky</option>
+                    <option>Louisiana</option>
+                    <option>Maine</option>
+                    <option >Maryland</option>
+                    <option> Mass</option>
+                    <option>Michigan</option>
+                    <option >Minnesota</option>
+                    <option>Mississippi</option>
+                    <option>Missouri</option>
+                    <option>Montana</option>
+                    <option>Nebraska</option>
+                    <option>Nevada</option>
+                    <option>New Hampshire</option>
+                    <option>New Jersey</option>
+                    <option>New Mexico</option>
+                    <option>New York</option>
+                    <option>North Carolina</option>
+                    <option>North Dakota</option>
+                    <option>Ohio</option>
+                    <option>Oklahoma</option>
+                    <option>Oregon</option>
+                    <option>Pennsylvania</option>
+                    <option>Rhode Island</option>
+                    <option>South Carolina</option>
+                    <option>South Dakota</option>
+                    <option>Tennessee</option>
+                    <option>Texas</option>
+                    <option>Utah</option>
+                    <option>Vermont</option>
+                    <option>Virginia</option>
+                    <option >Washington</option>
+                    <option >West Virginia</option>
+                    <option>Wisconsin</option>
+                    <option>Wyoming</option>
+                  </select>
+                </div>
+                     <p class="help-block" ng-if="userForm.state.$error.required">City is required</p>
+                     <p class = 'help-block' ng-if = 
+                     'userForm.state.$error.pattern'></p>
+                </div>
+
+
+
+
+                <button type = 'button' ng-click = "signUp(user)" class = "btn btn-primary">Submit</button>
+
+                </form>
+              <button class = 'btn btn-default signup-button' ui-sref = "login"> Click here to login</button>
             </div>
-            <p class="help-block" ng-if= "userForm.email.$error.required">The user's email is required</p>
-            <p class="help-block" ng-if= "userForm.email.$error.email">Not a valid emmail</p>
-
-    </div>
-
-
-    <div class = "form-group" show-errors>
-      <label for = "password">Password</label>
-      <div class = "input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-        <input name='password' type = "password" ng-model = "user.password" class = "form-control" id = "password"
-        placeholder = "Password" ng-minlength = '4' ng-maxlength="10" required>
-            </div>
-           <p class="help-block" ng-if="userForm.password.$error.required">The user's password is required</p>
-           <p class="help-block" ng-show="userForm.password.$error.minlength">Too short! Must be minimum 4 characters long</p>
-           <p class="help-block" ng-show="userForm.password.$error.maxlength">Too long!</p>
-    </div>
-
-
-    <button type = 'button' ng-click = "signUp(user)" class = "btn btn-primary">Submit</button>
-
-    </form>
-  <button class = 'btn btn-default signup-button' ui-sref = "login"> Click here to login</button>
-</div>
-
-
-
-
-
-
-
         </div>
     </div>
 </header>
