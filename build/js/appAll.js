@@ -96,6 +96,63 @@
 	}])
 }());
 (function() {
+	angular.module('DforD')
+	.controller('SignupController', ['$scope', '$state','$http','$window', function($scope, $state, $http, $window) {
+		$scope.signUp = function(user) {
+			$scope.$broadcast('show-errors-check-validity')
+
+			if ($scope.userForm.$invalid){return;}
+
+			$http.post('api/users', user)
+				.success(function(data) {
+					$window.sessionStorage.jwt = data['token']
+					$state.go('profile.info')
+				})
+				.error(function(error) {
+					console.log(error)
+				})
+		}
+	}])
+}());
+(function() {
+	angular.module('DforD')
+	.controller('MainController', ['$scope', '$state', '$http', '$window', 'AuthenticationService',
+		function($scope, $state, $http, $window, AuthenticationService) {
+
+			function getProfile() {
+				var token = $window.sessionStorage['jwt']
+				
+				$http.get('api/users/me', {
+					headers: {
+						"Authorization": `Bearer ${token}`
+					}
+				})
+				.success(function(data){
+						$scope.user = data
+				})
+				.error(function(err){
+					console.log(err)
+				})
+			}
+
+			getProfile()
+
+			angular.element(document).ready(function() {
+				$('.nav-pills li').first().addClass('active')
+
+				$('.nav-pills li').click(function(e) {
+				    $('.nav-pills li.active').removeClass('active');
+				    var $this = $(this);
+				    if (!$this.hasClass('active')) {
+				        $this.addClass('active');
+				    }
+				    e.preventDefault();
+				});
+			})
+		
+	}])
+}());
+(function() {
     angular.module('DforD')
     .factory('AuthenticationService', function($http) {
 	    
@@ -124,62 +181,6 @@
 
 	   }
 	})
-}());
-(function() {
-	angular.module('DforD')
-	.controller('MainController', ['$scope', '$state', '$http', '$window', 'AuthenticationService',
-		function($scope, $state, $http, $window, AuthenticationService) {
-
-			$scope.me = function() {
-
-				var token = $window.sessionStorage['jwt']
-				
-				$http.get('api/users/me', {
-					headers: {
-						"Authorization": `Bearer ${token}`
-					}
-				})
-				.success(function(data){
-						console.log(data)
-				})
-				.error(function(err){
-					console.log(err)
-				})
-			}
-
-			angular.element(document).ready(function() {
-				$('.nav-pills li').first().addClass('active')
-
-				$('.nav-pills li').click(function(e) {
-				    $('.nav-pills li.active').removeClass('active');
-				    var $this = $(this);
-				    if (!$this.hasClass('active')) {
-				        $this.addClass('active');
-				    }
-				    e.preventDefault();
-				});
-			})
-		
-	}])
-}());
-(function() {
-	angular.module('DforD')
-	.controller('SignupController', ['$scope', '$state','$http','$window', function($scope, $state, $http, $window) {
-		$scope.signUp = function(user) {
-			$scope.$broadcast('show-errors-check-validity')
-
-			if ($scope.userForm.$invalid){return;}
-
-			$http.post('api/users', user)
-				.success(function(data) {
-					$window.sessionStorage.jwt = data['token']
-					$state.go('profile.info')
-				})
-				.error(function(error) {
-					console.log(error)
-				})
-		}
-	}])
 }());
 (function() {
     angular.module('DforD')
@@ -222,7 +223,6 @@
     })
     .filter('tel', function () {
         return function (tel) {
-            console.log(tel);
             if (!tel) { return ''; }
 
             var value = tel.toString().trim().replace(/^\+/, '');

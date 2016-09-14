@@ -16,9 +16,9 @@
                   <div class = "input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                     <input 
-                    name='fname'
+                    name='firstName'
                     type = "text"
-                    ng-model = "user.fname"
+                    ng-model = "user.firstName"
                     class = "form-control"
                     id = "fname"
                     placeholder = "First Name"
@@ -27,9 +27,9 @@
                     required
                     >
                   </div>
-                       <p class="help-block" ng-if="userForm.fname.$error.required">First name is required</p>
-                       <p class="help-block" ng-show="userForm.fname.$error.minlength">Too short! Must be minimum 2 characters long</p>
-                       <p class="help-block" ng-show="userForm.fname.$error.maxlength">Is your name really that long??</p>
+                       <p class="help-block" ng-if="userForm.firstName.$error.required">First name is required</p>
+                       <p class="help-block" ng-show="userForm.firstName.$error.minlength">Too short! Must be minimum 2 characters long</p>
+                       <p class="help-block" ng-show="userForm.firstName.$error.maxlength">Is your name really that long??</p>
                 </div>
 
                  <div class = "form-group" show-errors>
@@ -37,20 +37,20 @@
                   <div class = "input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                     <input 
-                    name='lname'
+                    name='lastName'
                     type = "text"
-                    ng-model = "user.lname"
+                    ng-model = "user.lastname"
                     class = "form-control"
-                    id = "lname"
+                    id = "lastName"
                     placeholder = "Last Name"
                     ng-minlength = '2'
                     ng-maxlength="17" 
                     required
                     >
                   </div>
-                       <p class="help-block" ng-if="userForm.lname.$error.required">Last name is required</p>
-                       <p class="help-block" ng-show="userForm.lname.$error.minlength">Too short! Must be minimum 2 characters long</p>
-                       <p class="help-block" ng-show="userForm.lname.$error.maxlength">Is your name really that long??</p>
+                       <p class="help-block" ng-if="userForm.lastName.$error.required">Last name is required</p>
+                       <p class="help-block" ng-show="userForm.lastName.$error.minlength">Too short! Must be minimum 2 characters long</p>
+                       <p class="help-block" ng-show="userForm.lastName.$error.maxlength">Is your name really that long??</p>
                 </div>
 
                 <div class = "form-group" show-errors>

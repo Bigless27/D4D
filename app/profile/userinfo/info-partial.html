@@ -3,49 +3,49 @@
 		        	<table class = 'table table'>
 		        			<tr>
 		        				<th>First Name:</th>
-		        				<td>Name</td>
+		        				<td>{{user.firstName}}</td>
 		        				<td>
 		        					<a href="">Edit</a>
 		        				</td>
 		        			</tr>
 		        			<tr>
 		        				<th>Last Name:</th>
-		        				<td>Name</td>
+		        				<td>{{user.lastName}}</td>
 		        				<td>
 		        					<a href="">Edit</a>
 		        				</td>
 		        			</tr>
 		        			<tr>
 		        				<th>Email:</th>
-		        				<td>Name</td>
+		        				<td>{{user.email}}</td>
 		        				<td>
 		        					<a href="">Edit</a>
 		        				</td>
 		        			</tr>
 		        			<tr>
 		        				<th>Address:</th>
-		        				<td>Name</td>
+		        				<td>{{user.address}}</td>
 		        				<td>
 		        					<a href="">Edit</a>
 		        				</td>
 		        			</tr>
 		        			<tr>
 		        				<th>Zip:</th>
-		        				<td>Name</td>
+		        				<td>{{user.zip}}</td>
 		        				<td>
 		        					<a href="">Edit</a>
 		        				</td>
 		        			</tr>
 		        			<tr>
 		        				<th>Phone:</th>
-		        				<td>867-5309</td>
+		        				<td>{{user.phone}}</td>
 		        				<td>
 		        					<a href="">Edit</a>
 		        				</td>
 		        			</tr>
 		        			<tr>
-		        				<th>Date Joined:</th>
-		        				<td>867-5309</td>
+		        				<th>Member Since:</th>
+		        				<td>{{user.dateJoined | date: medium }}</td>
 		        				<td>
 		        					<a href="">Edit</a>
 		        				</td>
