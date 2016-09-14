@@ -4,7 +4,7 @@
 		        			<tr>
 		        				<th>First Name:</th>
 		        				<td>
-		        					<span editable-text="user.firstName" e-form="firstName">{{user.firstName}}</span>
+		        					<span editable-text="user.firstName" e-form="firstName" onbeforesave="updateName($data)">{{user.firstName}}</span>
 		        				</td>
 		        				<td>
 		        					<a href="" ng-click="firstName.$show()" ng-hide="firstName.$visible">Edit</a>
@@ -13,7 +13,7 @@
 		        			<tr>
 		        				<th>Last Name:</th>
 		        				<td>
-		        					<span editable-text="user.lastName" e-form="lastName">{{user.lastName}}</span>
+		        					<span editable-text="user.lastName" e-form="lastName" onbeforesave="updateName($data)">{{user.lastName}}</span>
 		        				</td>
 		        				<td>
 		        					<a href="" ng-click="lastName.$show()" ng-hide="lastName.$visible">Edit</a>
@@ -21,7 +21,9 @@
 		        			</tr>
 		        			<tr>
 		        				<th>Email:</th>
-		        				<td><span editable-text="user.email" e-form="email">{{user.email}}</span></td></td>
+		        				<td>
+		        					<span editable-text="user.email" e-form="email" onbeforesave="updateEmail($data)">{{user.email}}</span>
+		        				</td>
 		        				<td>
 		        					<a href="" ng-click="email.$show()" ng-hide="email.$visible">Edit</a>
 		        				</td>
@@ -29,16 +31,38 @@
 		        			<tr>
 		        				<th>Address:</th>
 		        				<td>
-		        					<span editable-text="user.address" e-form="address">{{user.address}}</span>
+		        					<span editable-text="user.address" e-form="address" onbeforesave="updateAddress($data)">{{user.address}}</span>
 		        				</td>
 		        				<td>
 		        					<a href="" ng-click="address.$show()" ng-hide="address.$visible">Edit</a>
 		        				</td>
 		        			</tr>
 		        			<tr>
+		        				<th>City:</th>
+		        				<td>
+		        					<span editable-text="user.city" e-form="city" onbeforesave="updatecity($data)">{{user.city}}</span>
+		        				</td>
+		        				<td>
+		        					<a href="" ng-click="city.$show()" ng-hide="city.$visible">Edit</a>
+		        				</td>
+		        			</tr>
+		        			<tr>
+		        				<th>State:</th>
+		        				<td>
+		        					<span editable-text="user.state" e-form="state" onbeforesave="updateState($data)">{{user.state || 'empty'}}</span>
+		        				</td>
+		        				<td>
+		        					<a href="" editable-text="user.state" e-uib-typeahead="state for state in states | filter:$viewValue | limitTo:8" class = 'state-edit'
+		        					>Edit
+		        					</a>
+
+		        				</td>
+		        			</tr>
+		        			<tr>
 		        				<th>Zip:</th>
 		        				<td>
-		        					<span editable-text="user.zip" e-form="zip">{{user.zip}}</span>
+		        					<span editable-text="user.zip" e-form="zip"
+		        					 onbeforesave="updateZip($data)">{{user.zip}}</span>
 		        				</td>
 		        				<td>
 		        					<a href="" ng-click="zip.$show()" ng-hide="zip.$visible">Edit</a>
@@ -47,7 +71,7 @@
 		        			<tr>
 		        				<th>Phone:</th>
 		        				<td>
-		        					<span editable-text="user.phone" e-form="phone">{{user.phone}}</span>
+		        					<span editable-text="user.phone" e-form="phone" onbeforesave="updatePhone($data)">{{user.phone | tel}}</span>
 		        				</td>
 		        				<td>
 		        					<a href="" ng-click="phone.$show()" ng-hide="phone.$visible">Edit</a>

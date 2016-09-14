@@ -20,3 +20,6 @@
 
 #profile-table td {
   padding: 20px 0px; }
+
+#profile-table .state-edit {
+  color: #2ff296; }

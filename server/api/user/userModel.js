@@ -17,6 +17,8 @@ var UserSchema = new Schema({
     lastName: { type: String },
     address: {type: String},
     zip: {type: Number},
+    city: {type: String},
+    state: {type: String},
     phone: {type: Number},
     dateJoined: { type: Date, default: Date.now },
     facebook: {

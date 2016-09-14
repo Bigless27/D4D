@@ -1,5 +1,5 @@
 (function() {
-	angular.module('DforD', ['ui.router', 'ui.bootstrap.showErrors', "xeditable"])
+	angular.module('DforD', ['ui.router', 'ui.bootstrap.showErrors', 'xeditable', 'ui.bootstrap'])
 	.config(['$stateProvider', '$urlRouterProvider', 'showErrorsConfigProvider', 
 		function($stateProvider, $urlRouterProvider, showErrorsConfigProvider) {
 
