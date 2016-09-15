@@ -3,6 +3,8 @@ var Schema = mongoose.Schema
 var bcrypt = require('bcrypt') 
 var jwt = require('express-jwt');
 
+
+
 var transactionsSchema = new Schema({
     name: {type: String},
     amount: {type: Number},
@@ -13,8 +15,8 @@ var transactionsSchema = new Schema({
 var UserSchema = new Schema({
     email: { type: String, unique: true, required: true, index: true },
     password: { type: String},
-    firstName: { type: String },
-    lastName: { type: String },
+    firstName: { type: String, required: true },
+    lastName: { type: String, required: true  },
     address: {type: String},
     zip: {type: Number},
     city: {type: String},

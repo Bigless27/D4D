@@ -27,6 +27,7 @@
 					url: '/profile',
 					templateUrl: 'app/profile/profile-partial.html',
 					controller: 'MainController',
+		
 					abstract: true,
 					onEnter: ['$state', '$rootScope', '$stateParams', '$location', '$window','AuthenticationService',
 					 function($state, $rootScope, $stateParams, $location, $window, AuthenticationService){

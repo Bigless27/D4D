@@ -1,7 +1,7 @@
 (function() {
 	angular.module('DforD')
-	.controller('MainController', ['$scope', '$state', '$http', '$window', 'AuthenticationService',
-		function($scope, $state, $http, $window, AuthenticationService) {
+	.controller('MainController', ['$scope', '$state', '$http', '$window', 'AuthenticationService', '$q',
+		function($scope, $state, $http, $window, AuthenticationService, $q) {
 
 			function getProfile() {
 				var token = $window.sessionStorage['jwt']
@@ -12,7 +12,6 @@
 					}
 				})
 				.success(function(data){
-						console.log(data)
 						$scope.user = data
 				})
 				.error(function(err){
@@ -22,7 +21,24 @@
 
 
 
-			$scope.updateName = function(data){
+
+
+			$scope.updateFName = function(data){
+				if(data === ''){
+					return 'Name is Required'
+				}
+				if(data.length < 2){
+					return 'Name needs to be at least two characters'
+				}
+				else if(data.length > 20){
+					return 'Name is to long'
+				}
+				return updateUser(data, 'firstName')
+
+			} 
+
+
+			$scope.updateLName = function(data){
 				if(data === ''){
 					return 'Name is Required'
 				}
@@ -32,6 +48,7 @@
 				else if(data.length > 20){
 					return 'Name is to long'
 				}
+				return updateUser(data, 'lastName')
 
 			} 
 
@@ -43,30 +60,39 @@
 				else if(!data.match(re)){
 					return 'Not valid format'
 				}
+				return updateUser(data, 'email')
 
 			}
-
+			
+			//validations
 			$scope.updateAddress = function(data) {
 				if(data === ''){
 					return 'Address is required'
 				}
+				return updateUser(data, 'address')
 			}
 
+			//validations
 			$scope.updateCity = function(data) {
 				  if (data === ''){
 				  	return 'City is required'
 				  }
+				  return updateUser(data, 'city')
 			}
 
-			 $scope.states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
+			$scope.states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
+
 
 			$scope.updateState = function(data) {
 				if(data === ''){
 					return 'State is required'
 				}
+				return updateUser(data, 'state')
 			}
 
+			//validations
 			$scope.updateZip = function(data) {
+
 				if(data === ''){
 					return 'Zip is required'
 				}
@@ -76,18 +102,36 @@
 				else if(data.length > 8){
 					return 'Not Valid'
 				}
+				return updateUser(data, 'zip')
 			}
 
+			//need validations
 			$scope.updatePhone = function(data) {
-				if(data !== ''){
-					if(data.length !== 10)
-					 return 'invalid number U.S'
-				}
-
+				return updateUser(data, 'phone')
 			}
 
 
+			function updateUser(data, field){
+				var d = $q.defer();
+				var token = $window.sessionStorage['jwt']
+				$scope.user[field] = data;
 
+				console.log($scope.user)
+
+				$http.put('/api/users/' + $scope.user._id, $scope.user, {
+					headers: {
+						'Authorization': `Bearer ${token}`
+					}
+				})
+				.success(function(data) {
+					$scope.user = data
+					d.resolve()
+				})
+				.error(function(err) {
+					d.reject(`${err.message}!`)
+				})
+				return d.promise
+			}
 
 
 			getProfile()

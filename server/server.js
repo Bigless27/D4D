@@ -43,8 +43,7 @@ app.use('/app', express.static(path.join(__dirname, '../app')))
 
 // set up global error handling
 app.use(function(err, req, res, next) {
-	console.log(err);
-  res.status(500).send('Oops');
+	 	res.status(500).send(`${err}`);
 });
 
 

@@ -48,12 +48,22 @@ exports.put = function(req, res, next) {
 
   _.merge(user, update);
 
+
   user.save(function(err, saved) {
     if (err) {
-      next(err);
+       if (err.name === 'MongoError' && err.code === 11000) {
+        // Duplicate username
+      	res.status(500).send({ succes: false, message: 'Already taken' });
+      }
+      else{
+      	next(err)
+      }
+
     } else {
       res.json(saved.toJson());
     }
+  }, function(err) {
+  	next(err)
   })
 };
 
@@ -69,7 +79,7 @@ exports.post = function(req, res, next) {
     var token = signToken(user._id);
     res.json({token: token});
   }, function(err) {
-  	console.log(err)
+  	next(err)
   });
 };
 
