@@ -2,6 +2,10 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema
 var bcrypt = require('bcrypt') 
 var jwt = require('express-jwt');
+var addressValidator = require('address-validator')
+var Address = addressValidator.Address;
+var _ = require('lodash')
+
 
 
 
@@ -13,7 +17,7 @@ var transactionsSchema = new Schema({
 })
 
 var UserSchema = new Schema({
-    email: { type: String, unique: true, required: true, index: true },
+    email: { type: String, required: true, index: true },
     password: { type: String},
     firstName: { type: String, required: true },
     lastName: { type: String, required: true  },
@@ -51,6 +55,33 @@ UserSchema.methods = {
             if(err) return cb(err)
             cb(err, isMatch)
         })
+    },
+
+    verifyAddress: function(newUser, cb) {
+
+        var address = new Address({
+            street: newUser.address + ' ' + newUser.city + ' ' + newUser.state,
+            country: 'US'
+        })
+
+        addressValidator.validate(address, addressValidator.match.streetAddress, function(err, exact, inexact) {
+            console.log(`input: ${address}`)
+            console.log(exact)
+            console.log(inexact)
+            if(err) {return cb(err)}
+            else if(exact.length > 1){
+                return cb(err, true)
+            }
+            else{
+                addressArray = []
+                inexact.forEach(function(ad) {
+                    addressArray.push(`${ad.streetNumber} ${ad.street} ${ad.city} ${ad.stateAbbr} ${ad.postalCode}`)
+                })
+                return cb(err, addressArray)
+            }
+
+        })
+
     },
 
     //hash the password

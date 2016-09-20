@@ -74,13 +74,27 @@ exports.post = function(req, res, next) {
 
   var newUser = new User(req.body);
 
-  newUser.save(function(err, user) {
-    if(err) { return next(err);}
-    var token = signToken(user._id);
-    res.json({token: token});
-  }, function(err) {
-  	next(err)
-  });
+
+  newUser.verifyAddress(newUser, function(err, match){
+    if (err) {
+      console.log(err)
+    }
+    else if(match === true) {
+      res.json(match)
+    }
+    else if(match.length > 0){
+      next(match)
+    }
+    else{
+        newUser.save(function(err, user) {
+          if(err) { return next(err);}
+          var token = signToken(user._id);
+          res.json({token: token});
+        }, function(err) {
+        	next(err)
+        });
+    }
+  })
 };
 
 exports.delete = function(req, res, next) {	

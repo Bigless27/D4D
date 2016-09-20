@@ -132,21 +132,6 @@
                        <p class="help-block" ng-if="userForm.address.$error.pattern">Address isn't valid</p>
                 </div>
 
-               <div class = "form-group" show-errors>
-                <label for = "zip">Zip</label>
-                <div class = "input-group">
-                  <span class="input-group-addon"><i class="glyphicon glyphicon-road"></i></span>
-                  <input required
-                  name='zip'
-                  type = "zip"
-                  ng-model = "user.zip"
-                  class = "form-control"
-                  id = "zip"
-                  placeholder = "Zip"
-                  >
-                </div>
-                     <p class="help-block" ng-if="userForm.zip.$error.required">Zip is required</p>
-              </div>
 
                <div class = "form-group" show-errors>
                 <label for = "city">City</label>
@@ -232,8 +217,30 @@
                      'userForm.state.$error.pattern'></p>
                 </div>
 
+               <div class = "form-group" show-errors>
+                <label for = "zip">Zip</label>
+                <div class = "input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-road"></i></span>
+                  <input required
+                  name='zip'
+                  type = "zip"
+                  ng-model = "user.zip"
+                  class = "form-control"
+                  id = "zip"
+                  placeholder = "Zip"
+                  >
+                </div>
+                     <p class="help-block" ng-if="userForm.zip.$error.required">Zip is required</p>
+              </div>
 
-
+              <div ng-if = 'errorDisplay'>
+                <span style = 'color: red;'>Address is invalid, maybe try these sugestions:</span>
+                 <ul class = 'help-block' ng-if = 'errorDisplay' ng-repeat= 'ad in ads'>
+                      <li style = 'list-style: none; color: black'>
+                          {{ad}}
+                      </li>
+                  </ul>
+              </div>
 
                 <button type = 'button' ng-click = "signUp(user)" class = "btn btn-primary">Submit</button>
 
