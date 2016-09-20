@@ -95,7 +95,6 @@ exports.delete = function(req, res, next) {
 
 exports.me = function(req, res) {
 	//common node route :)
-	console.log('hello');
    res.json(req.user.toJson());
 };
 
