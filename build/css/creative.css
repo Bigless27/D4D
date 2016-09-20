@@ -12,6 +12,14 @@ body{
   font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
 }
 
+#dallas-skyline-night{
+  background-position: 50px 500px;
+}
+
+.{
+  
+}
+
 
 hr {
   border-color: #F05F40;
@@ -46,8 +54,7 @@ p {
 }
 
 #bottom-city{
-  height: 250px;
-  display: block;
+
 }
 
 
@@ -61,6 +68,8 @@ p {
 .text-faded {
   color: rgba(255, 255, 255, 0.7);
 }
+
+
 section {
   padding: 100px 0;
 }
@@ -230,7 +239,7 @@ header .header-content .header-content-inner p {
 @media (min-width: 992px) {
  
   #bottom-city{
-    height: 500px;
+    height: 700px;
   }
   .service-box {
     margin: 20px auto 0;
@@ -262,10 +271,10 @@ header .header-content .header-content-inner p {
 @media (min-width: 768px) {
 }
 .call-to-action h2 {
-  margin: 0 auto 20px;
+  display: block;
 }
 .text-primary {
-  color: #F05F40;
+  color: #2ff296;
 }
 .no-gutter > [class*='col-'] {
   padding-right: 0;
