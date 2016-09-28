@@ -63,7 +63,7 @@ p {
   margin-bottom: 20px; }
 
 .bg-primary {
-  background-color: #10293e; }
+  background-color: #182e5d; }
 
 .bg-dark {
   background-color: #222222;
@@ -71,6 +71,32 @@ p {
 
 .text-faded {
   color: rgba(255, 255, 255, 0.7); }
+
+#idea42 #idea42-header {
+  color: #61e666;
+  text-align: center;
+  font-size: 45px; }
+
+#idea42 #idea42-btn {
+  background-color: #61e666;
+  color: white; }
+
+#idea42 #idea42-btn:hover {
+  background-color: red; }
+
+#idea42 p {
+  color: #61e666;
+  text-align: center;
+  font-size: 18px;
+  font-family: verdana; }
+
+#idea42 .social-icons {
+  padding: 20px 0px;
+  width: 180px;
+  margin: auto; }
+
+#contact {
+  background-color: #ccc; }
 
 section {
   padding: 100px 0; }
