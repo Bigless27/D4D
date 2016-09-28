@@ -16,6 +16,13 @@ var transactionsSchema = new Schema({
     status: {type: String}
 })
 
+var billingSchema = new Schema ({
+    name: {type: String},
+    amount: {type: Number},
+    date: {type: Date},
+    status: {type: String}
+})
+
 var UserSchema = new Schema({
     email: { type: String, required: true, index: true },
     password: { type: String},
@@ -38,7 +45,8 @@ var UserSchema = new Schema({
         email: String,
         name: String
     },
-    transactions: [transactionsSchema]
+    transactions: [transactionsSchema],
+    billing: [billingSchema]
 });
 
 UserSchema.pre('save', function(next) {
