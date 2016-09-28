@@ -11,7 +11,15 @@
     margin: auto;
     padding-bottom: 20px; }
     #profile-container .table-container #trans-table th {
-      text-align: center; }
+      text-align: center;
+      padding: 20px 0px; }
+    #profile-container .table-container #trans-table td {
+      padding: 20px 0px; }
+    #profile-container .table-container #billing-table th {
+      text-align: center;
+      padding: 20px 0px; }
+    #profile-container .table-container #billing-table td {
+      padding: 20px 0px; }
 
 #dallas-header .nav a {
   background-color: #282880; }

@@ -18,7 +18,20 @@
 
 		#trans-table{
 			th{
-				text-align: center
+				text-align: center;
+				padding: 20px 0px;
+			}
+			td{
+				padding: 20px 0px;
+			}
+		}
+		#billing-table{
+			th{
+				text-align: center;
+				padding: 20px 0px;
+			}
+			td{
+				padding: 20px 0px;
 			}
 		}
 
@@ -32,6 +45,8 @@
 			}
 		}
 }
+
+
 
 #profile-table{
 	th{
