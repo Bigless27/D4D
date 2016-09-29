@@ -19,7 +19,8 @@ body{
 
 #home-heading{
   padding-top: 100px;
-  font-size: 100px
+  font-size: 100px;
+  color: #2ff296;
 }
 #template-header{
   text-align: center;
@@ -113,12 +114,18 @@ p {
     width: 180px;
     margin: auto;
   }
-
-  
 }
 
-#contact{
-  background-color: #ccc ;
+#our-process{
+  .steps{
+    padding-bottom: 20px;
+    color: white;
+  }
+}
+
+
+.grey-background{
+  background-color: #252323 ;
 }
 
 section {
