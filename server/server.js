@@ -6,6 +6,7 @@ var config = require('./config/config');
 var mongoose = require('mongoose');
 var path = require('path');
 var passport = require('passport')
+var logger = require('./util/logger');
 
 
 // db.url is different depending on NODE_ENV
@@ -41,9 +42,15 @@ app.use('/app', express.static(path.join(__dirname, '../app')))
 
 
 
-// set up global error handling
 app.use(function(err, req, res, next) {
-	 	res.status(500).send(`${err}`);
+  // if error thrown from jwt validation check
+  if (err.name === 'UnauthorizedError') {
+    res.status(401).send('Invalid token');
+    return;
+  }
+
+  logger.error(err.stack);
+  res.status(500).send('Oops');
 });
 
 

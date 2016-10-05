@@ -8,7 +8,9 @@
 var config = require('./server/config/config');
 var app = require('./server/server');
 var http = require('http');
+var logger = require('./server/util/logger');
+
 
 var server = app.listen(config.port, function() {
-    console.log('listening on http://localhost:' + config.port);
+    logger.log('listening on http://localhost:' + config.port);
 })

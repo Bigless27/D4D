@@ -33,7 +33,6 @@ body{
 }
 
 
-
 hr {
   border-color: #F05F40;
   border-width: 3px;
@@ -125,6 +124,21 @@ p {
     font-size: 60px;
   }
 }
+
+/*shopping cart thumbnails*/
+
+.thumbnail img {
+    max-height: 150px;
+}
+
+.thumbnail .description {
+    color: #7f7f7f;
+}
+.price {
+    font-weight: bold;
+    font-size: 16px;
+}
+
 
 ol {
     counter-reset: li; /* Initiate a counter */
