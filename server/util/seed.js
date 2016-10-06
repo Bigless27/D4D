@@ -13,7 +13,7 @@ var products = [
   {
           imagePath: 'http://eu.blizzard.com/static/_images/games/wow/wallpapers/wall2/wall2-1440x900.jpg',
           title: 'World of Warcraft Video Game',
-          description: 'Also awesome? But of course it was better in vanilla ...',
+          description: 'It was better in vanilla ...',
           price: 20
   },
   {

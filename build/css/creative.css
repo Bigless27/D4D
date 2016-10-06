@@ -93,6 +93,24 @@ p {
   width: 180px;
   margin: auto; }
 
+/*shopping cart thumbnails*/
+.thumbnail img {
+  height: 150px;
+  width: 200px; }
+
+.thumbnail .description {
+  color: #7f7f7f; }
+
+.price {
+  font-weight: bold;
+  font-size: 16px; }
+
+#templates {
+  background-image: url("../img/dallas-eyeball.jpg");
+  background-position: right;
+  background-repeat: no-repeat;
+  background-size: 100% 100%; }
+
 /*Our Process Section*/
 #our-process {
   background-color: rgba(49, 21, 21, 0.1); }
@@ -102,17 +120,6 @@ p {
   #our-process .process {
     color: #337ab7;
     font-size: 60px; }
-
-/*shopping cart thumbnails*/
-.thumbnail img {
-  max-height: 150px; }
-
-.thumbnail .description {
-  color: #7f7f7f; }
-
-.price {
-  font-weight: bold;
-  font-size: 16px; }
 
 ol {
   counter-reset: li;

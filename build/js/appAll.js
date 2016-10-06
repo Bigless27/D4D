@@ -97,28 +97,6 @@
 }());
 (function() {
 	angular.module('DforD')
-	.controller('LoginController', ['$scope', '$state', '$http', 'AuthenticationService', '$window',
-	'$rootScope', function($scope, $state, $http, AuthenticationService, $window, $rootScope) {
-		
-		$scope.logUserIn = function(user) {
-			$scope.$broadcast('show-errors-check-validity');
-
-			if($scope.userForm.$invalid){return;}
-
-			$http.post('auth/signin', user)
-					.success(function(data) {
-						$window.sessionStorage.jwt = data['token']
-						$rootScope.loggedIn = true
-						$state.go('profile.info')
-					})
-					.error(function(error) {
-						console.log(error)
-			})
-		}
-	}])
-}());
-(function() {
-	angular.module('DforD')
 	.controller('MainController', ['$scope', '$state', '$http', '$window', 'AuthenticationService', '$q',
 		function($scope, $state, $http, $window, AuthenticationService, $q) {
 
@@ -273,6 +251,48 @@
 	}])
 }());
 (function() {
+	angular.module('DforD')
+	.controller('SignupController', ['$scope', '$state','$http','$window', function($scope, $state, $http, $window) {
+		$scope.signUp = function(user) {
+			$scope.errorDisplay = false
+			$scope.$broadcast('show-errors-check-validity')
+
+			if ($scope.userForm.$invalid){return;}
+
+			$http.post('api/users', user)
+				.success(function(data) {
+					$state.go('login')
+				})
+				.error(function(err) {
+					$scope.ads = err.split(',')
+					$scope.errorDisplay = true
+				})
+		}
+	}])
+}());
+(function() {
+	angular.module('DforD')
+	.controller('LoginController', ['$scope', '$state', '$http', 'AuthenticationService', '$window',
+	'$rootScope', function($scope, $state, $http, AuthenticationService, $window, $rootScope) {
+		
+		$scope.logUserIn = function(user) {
+			$scope.$broadcast('show-errors-check-validity');
+
+			if($scope.userForm.$invalid){return;}
+
+			$http.post('auth/signin', user)
+					.success(function(data) {
+						$window.sessionStorage.jwt = data['token']
+						$rootScope.loggedIn = true
+						$state.go('profile.info')
+					})
+					.error(function(error) {
+						console.log(error)
+			})
+		}
+	}])
+}());
+(function() {
     angular.module('DforD')
     .factory('AuthenticationService', function($http) {
 	    
@@ -301,26 +321,6 @@
 
 	   }
 	})
-}());
-(function() {
-	angular.module('DforD')
-	.controller('SignupController', ['$scope', '$state','$http','$window', function($scope, $state, $http, $window) {
-		$scope.signUp = function(user) {
-			$scope.errorDisplay = false
-			$scope.$broadcast('show-errors-check-validity')
-
-			if ($scope.userForm.$invalid){return;}
-
-			$http.post('api/users', user)
-				.success(function(data) {
-					$state.go('login')
-				})
-				.error(function(err) {
-					$scope.ads = err.split(',')
-					$scope.errorDisplay = true
-				})
-		}
-	}])
 }());
 (function() {
     angular.module('DforD')
